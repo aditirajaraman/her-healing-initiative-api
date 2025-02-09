@@ -72,6 +72,7 @@ response : {
 }
 
 ## Integrate CORS  
+npm install @types/cors
 https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api
 
 ## End Urls 
