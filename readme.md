@@ -51,6 +51,8 @@ DELETE: Delete a book by sending a DELETE request to http://localhost:5500/api/b
 
 GET: Retrieve all books by sending a GET request to http://localhost:5500/api/countries
 
+GET: Retrieve all books by sending a GET request to http://localhost:5500/api/users
+
 # Build and Serve Your API
 npm run build
 npm run serve
