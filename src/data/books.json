@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "1985",
+    "author": "George Orwell",
+    "createdAt": "2024-12-22T20:40:55.519Z",
+    "updatedAt": ""
+  },
+  {
+    "id": 2,
+    "title": "Enigma",
+    "author": "Aditi Rajaraman",
+    "createdAt": "2024-12-22T20:40:55.519Z",
+    "updatedAt": "2024-12-22T22:47:06.394Z"
+  },
+  {
+    "id": 3,
+    "title": "Apple Pie",
+    "author": "Arvind Rajaraman",
+    "createdAt": "2024-12-22T20:40:55.519Z",
+    "updatedAt": "2024-12-22T22:47:06.394Z"
+  }
+]
