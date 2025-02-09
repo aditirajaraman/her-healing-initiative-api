@@ -49,6 +49,8 @@ POST: Create a new book by sending a POST request with JSON data (title and auth
 PUT: Update a book by sending a PUT request to http://localhost:5500/api/books/:id
 DELETE: Delete a book by sending a DELETE request to http://localhost:5500/api/books/:id
 
+GET: Retrieve all books by sending a GET request to http://localhost:5500/api/countries
+
 # Build and Serve Your API
 npm run build
 npm run serve
@@ -81,3 +83,4 @@ https://www.mongodb.com/developer/languages/javascript/node-connect-mongodb/
 https://www.mongodb.com/resources/products/compatibilities/using-typescript-with-mongodb-tutorial
 https://www.mongodb.com/community/forums/t/typescript-create-db-collection-and-add-json-data-to-the-collection/215478
 https://www.mongodb.com/community/forums/t/working-with-node-js-driver-using-typescript-and-express/259524
+
