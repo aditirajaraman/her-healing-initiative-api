@@ -86,3 +86,8 @@ https://www.mongodb.com/resources/products/compatibilities/using-typescript-with
 https://www.mongodb.com/community/forums/t/typescript-create-db-collection-and-add-json-data-to-the-collection/215478
 https://www.mongodb.com/community/forums/t/working-with-node-js-driver-using-typescript-and-express/259524
 
+### Github Repo Settings 
+git config --get user.name 
+git config --get user.email 
+git config set  user.name "aditirajaraman"
+git config set  user.email "aditirajaraman10272008@gmail.com"
