@@ -1,25 +1,22 @@
 # How to Build a REST API with Node.js and TypeScript
 
-How to Build a REST API with Node.js and TypeScript
-
 # Initialize the Project 
-mkdir her-healing-initiative-api
-cd her-healing-initiative-api
-npm init -y  //It would create a pacakge.json 
+### mkdir her-healing-initiative-api
+### cd her-healing-initiative-api
+### npm init -y  //It would create a pacakge.json 
 
 # Install TypeScript and Node Dependencies
-npm install typescript ts-node @types/node --save-dev
+### npm install typescript ts-node @types/node --save-dev
 
 # Install Express and Its Types
-npm install express
-npm install @types/express --save-dev
-
+### npm install express
+### npm install @types/express --save-dev
 
 # Install a Nodemon for Development
-npm install nodemon ts-node --save-dev
+### npm install nodemon ts-node --save-dev
 
 # Set Up TypeScript Configuration -- will generate a tsconfig.json
-npx tsc --init 
+### npx tsc --init 
 
 # Add Scripts to package.json
 "scripts": {
@@ -30,19 +27,18 @@ npx tsc --init
 }
 
 # Create the Express Server
-src/index.ts file
+### src/index.ts file
 
 # Run the Server
-npm run dev
-
+### npm run dev
 
 # Define Routes for CRUD Operations
-Create a src/routes/bookRoutes.ts file
+### Create a src/routes/bookRoutes.ts file
 
-# Define Routes in your Startup Project 
+### Define Routes in your Startup Project 
 Update src/index.ts
 
-# Routes 
+### Routes 
 GET: Retrieve all books by sending a GET request to http://localhost:5500/api/books
 GET (by ID): Retrieve a specific book by sending a GET request to http://localhost:5500/api/books/:id
 POST: Create a new book by sending a POST request with JSON data (title and author) to http://localhost:5500/api/books
@@ -53,15 +49,14 @@ GET: Retrieve all books by sending a GET request to http://localhost:5500/api/co
 
 GET: Retrieve all books by sending a GET request to http://localhost:5500/api/users
 
-# Build and Serve Your API
+### Build and Serve Your API
 npm run build
 npm run serve
 
-
-# Other References 
+### Other References 
 https://robkendal.co.uk/blog/build-a-restful-node-api-server-using-json-and-typescript/
 
-# Tests / Via Posatman 
+### Tests / Via Posatman 
 http://localhost:3000/api/books
 
 body :  { "title": "Scholastics Gold", "author": "Aditi Rajaraman" }
@@ -71,24 +66,39 @@ response : {
     "author": "Aditi Rajaraman"
 }
 
-## Integrate CORS  
+### Integrate CORS  
 npm install @types/cors
 https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api
 
-## End Urls 
+### End Urls 
 http://localhost:5000/api/workItems
 
 
-## References
+# References
 
 # How to Use TypeScript with MongoDB Atlas
-https://www.mongodb.com/developer/languages/javascript/node-connect-mongodb/
-https://www.mongodb.com/resources/products/compatibilities/using-typescript-with-mongodb-tutorial
-https://www.mongodb.com/community/forums/t/typescript-create-db-collection-and-add-json-data-to-the-collection/215478
-https://www.mongodb.com/community/forums/t/working-with-node-js-driver-using-typescript-and-express/259524
+###  https://www.mongodb.com/developer/languages/javascript/node-connect-mongodb/
+### https://www.mongodb.com/resources/products/compatibilities/using-typescript-with-mongodb-tutorial
+### https://www.mongodb.com/community/forums/t/typescript-create-db-collection-and-add-json-data-to-the-collection/215478
+### https://www.mongodb.com/community/forums/t/working-with-node-js-driver-using-typescript-and-express/259524
 
-### Github Repo Settings 
-git config --get user.name 
-git config --get user.email 
-git config set  user.name "aditirajaraman"
-git config set  user.email "aditirajaraman10272008@gmail.com"
+# integrate Mongodb
+### npm install mongoose
+### npm install mongoose @types/mongoose
+
+# Github Repo Settings 
+### git config --get user.name 
+### git config --get user.email 
+### git config set  user.name "aditirajaraman"
+### git config set  user.email "aditirajaraman10272008@gmail.com"
+
+http://localhost:5500/api/users
+{
+	"firstname" : "Aditi", 
+	"lastname":"Rajaraman",
+	"email":"aditirajaraman10272008@gmail.com",
+	"country":"USA",
+	"username":"aditirajaraman",
+	"password":"aditi@r",
+	"birthdate":"27/10/2008"
+}

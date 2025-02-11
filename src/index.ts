@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import cors from 'cors'
 import bookRoutes from "./routes/bookRoutes";
 import countryRoutes from "./routes/countryRoutes";
+import userRoutes from "./routes/userRoutes";
+
 const app = express();
 const PORT = process.env.PORT || 5500;
 
@@ -23,6 +25,7 @@ app.use(express.json());
 
 app.use("/api", bookRoutes);
 app.use("/api", countryRoutes);
+app.use("/api", userRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to the her-healing-initiative API!");
