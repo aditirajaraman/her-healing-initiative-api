@@ -36,29 +36,33 @@ userRoutes.get("/users/:id", (req: Request, res: Response) => {
 userRoutes.post("/users", (req: Request, res: Response) => {
    //var user = new User(req.body);
    //const formattedDate: Date = format(req.body.birthdate, 'dd/MM/yyyy');
-   const formattedDate = parse(req.body.birthdate, 'dd/MM/yyyy', new Date());
-   
+   console.log("Initiated Post Request...");
+   console.log(req.body);
+   //console.log(format(req.body.birthdate, "yyyy-MM-dd"));
+   //const formattedDate = parse(req.body.birthdate, 'dd/MM/yyyy', new Date());
+   const formattedDate = parse(format(req.body.birthdate, "yyyy-MM-dd"), 'yyyy-MM-dd', new Date());
+   console.log(formattedDate);
    let user = new User({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
     username: req.body.username,
     password: req.body.password,
-    country: req.body.country,
+    country: req.body.country.code,
     birthdate: formattedDate
    });
 
    try {
      const savedUser = user.save().then(function(result){
          console.log('User saved....');
-         res.send(savedUser);
+         res.json({success: true, message: "Successful"});
      })
- 
- 
-   } catch (error: any) {
+  } catch (error: any) {
      console.error('Error saving User:' + error.message);
-     res.send('Error saving User:' + error.message);
+     //res.send('Error saving User:' + error.message);
+     res.json({success: false, message: error.message});
    }
+   //console.log(user);
 });
 
 //Update a book by ID
