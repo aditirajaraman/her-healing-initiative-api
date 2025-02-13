@@ -52,17 +52,32 @@ userRoutes.post("/users", (req: Request, res: Response) => {
     birthdate: formattedDate
    });
 
-   try {
-     const savedUser = user.save().then(function(result){
-         console.log('User saved....');
-         res.json({success: true, message: "Successful"});
-     })
-  } catch (error: any) {
-     console.error('Error saving User:' + error.message);
-     //res.send('Error saving User:' + error.message);
-     res.json({success: false, message: error.message});
-   }
-   //console.log(user);
+   let foundUser = false;
+   /*----------------------Check for Registered Users ----------------*/
+   //User.exists( {username: 'aditir'});
+   User.exists({username: user.username}).then(result => { 
+      console.log(result) 
+      foundUser = ( result == null )  ? false:true;
+      if (foundUser)
+      {
+        res.json({success: false, message: "Already Registered User."});
+      }
+      else{
+        try {
+          const savedUser = user.save().then(function(result){
+              console.log('User saved....');
+              res.json({success: true, message: "Successful"});
+          })
+        } catch (error: any) {
+          console.error('Error saving User:' + error.message);
+          res.json({success: false, message: error.message});
+        }
+      }
+   })
+
+   console.log('foundUser: '+ foundUser + ' username:' +  user.username);
+   
+   
 });
 
 //Update a book by ID

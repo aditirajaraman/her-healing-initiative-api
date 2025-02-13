@@ -98,7 +98,7 @@ http://localhost:5500/api/users
 	"lastname":"Rajaraman",
 	"email":"aditirajaraman10272008@gmail.com",
 	"country":"USA",
-	"username":"aditirajaraman",
+	"username":"aditir",
 	"password":"aditi@r",
 	"birthdate":"27/10/2008"
 }
