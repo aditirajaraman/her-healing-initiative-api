@@ -92,6 +92,7 @@ http://localhost:5000/api/workItems
 ### git config set  user.name "aditirajaraman"
 ### git config set  user.email "aditirajaraman10272008@gmail.com"
 
+### POST
 http://localhost:5500/api/users
 {
 	"firstname" : "Aditi", 
@@ -101,4 +102,12 @@ http://localhost:5500/api/users
 	"username":"aditir",
 	"password":"aditi@r",
 	"birthdate":"27/10/2008"
+}
+
+//POST
+http://localhost:5500/api/events
+{
+	"eventTitle" : "Writing and Mindfulness", 
+	"eventSubTitle":"Host @HerHealing Initiative",
+	"eventSummary":"This workshop will be a combination of writing exercises, meditation, mindfulness practices, somatics, discussion, lecture, etc. all centered around the theme of cultivating self-compassion. This a weekly workshop and each week we'll focus on a different topic."
 }

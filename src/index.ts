@@ -1,8 +1,10 @@
 import express, { Request, Response } from "express";
 import cors from 'cors'
+
 import bookRoutes from "./routes/bookRoutes";
-import countryRoutes from "./routes/countryRoutes";
+import lookupRoutes from "./routes/lookupRoutes";
 import userRoutes from "./routes/userRoutes";
+import eventRoutes from "./routes/eventRoutes";
 
 const app = express();
 const PORT = process.env.PORT || 5500;
@@ -24,8 +26,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api", bookRoutes);
-app.use("/api", countryRoutes);
+app.use("/api", lookupRoutes);
 app.use("/api", userRoutes);
+app.use("/api", eventRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to the her-healing-initiative API!");
