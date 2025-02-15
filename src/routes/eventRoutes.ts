@@ -19,6 +19,18 @@ eventRoutes.get("/events", (req: Request, res: Response) => {
   }
 });
 
+eventRoutes.get("/events/:id", (req: Request, res: Response) => {
+  try {
+    Event.findById(req.params.id).then(function(result){
+      console.log('Found Event...');
+      res.send(result);
+    })
+  } catch (error: any) {
+    console.error('Error Finding Event:' + error.message);
+    res.send(error.message);
+  }
+});
+
 
 // Create a new User
 eventRoutes.post("/events", (req: Request, res: Response) => {
