@@ -111,3 +111,13 @@ http://localhost:5500/api/events
 	"eventSubTitle":"Host @HerHealing Initiative",
 	"eventSummary":"This workshop will be a combination of writing exercises, meditation, mindfulness practices, somatics, discussion, lecture, etc. all centered around the theme of cultivating self-compassion. This a weekly workshop and each week we'll focus on a different topic."
 }
+
+### How To run the Project 
+Launch VSCode Terminal 
+npm run dev
+
+### Debug API 
+1) Launch Postman 
+2) Choose Method : GET, POST etc. 
+3) New HTTP Request on Postman 
+4) Run API : http://localhost:5500/api/events
