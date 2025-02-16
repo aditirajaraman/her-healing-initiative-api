@@ -10,7 +10,7 @@ const eventRoutes = Router();
 eventRoutes.get("/events", (req: Request, res: Response) => {
   try {
     Event.find().then(function(result){
-      console.log('Found Events...');
+      //console.log('Found Events...');
       res.send(result);
     })
   } catch (error: any) {
@@ -22,7 +22,7 @@ eventRoutes.get("/events", (req: Request, res: Response) => {
 eventRoutes.get("/events/:id", (req: Request, res: Response) => {
   try {
     Event.findById(req.params.id).then(function(result){
-      console.log('Found Event...');
+      //console.log('Found Event...');
       res.send(result);
     })
   } catch (error: any) {
@@ -36,8 +36,8 @@ eventRoutes.get("/events/:id", (req: Request, res: Response) => {
 eventRoutes.post("/events", (req: Request, res: Response) => {
     //var user = new User(req.body);
     //const formattedDate: Date = format(req.body.birthdate, 'dd/MM/yyyy');
-    console.log("Initiated Post Request...");
-    console.log(req.body);
+    //console.log("Initiated Post Request...");
+    //console.log(req.body);
     //const formattedDate = parse(format(req.body.birthdate, "yyyy-MM-dd"), 'yyyy-MM-dd', new Date());
     //console.log(formattedDate);
     let event = new Event({
@@ -52,7 +52,7 @@ eventRoutes.post("/events", (req: Request, res: Response) => {
     /*----------------------Save Events ----------------*/
     try {
       const savedEvent = event.save().then(function(result){
-          console.log('User saved....');
+          //console.log('User saved....');
           res.json({success: true, message: "Successful"});
       })
     } catch (error: any) {
