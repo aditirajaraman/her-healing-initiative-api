@@ -6,14 +6,23 @@ import lookupRoutes from "./routes/lookupRoutes";
 import userRoutes from "./routes/userRoutes";
 import eventRoutes from "./routes/eventRoutes";
 
+import { Config, Environment  } from "./configuration/config.type";
+import { getConfig} from "./configuration/configs/get-config";
+
+const config:Config = getConfig({ENV:"development"})
+
 const app = express();
-const PORT = process.env.PORT || 5500;
+const PORT = config.apiPort || 3000;
+
+//console.log(`environment : ${config.environment} `);
+//console.log(`apiEndpoint : ${config.apiEndpoint} `);
 
 // Add a list of allowed origins.
 // If you have more origins you would like to add, you can add them to the array below.
 //const allowedOrigins = ['http://localhost:6000'];
 const corsOptions = {
-  origin: [process.env.CLIENT_BASE_URL || 'http://localhost:3000', 'https://www.getpostman.com'], // Allow requests only from this origin
+  //origin: [process.env.CLIENT_BASE_URL || config.WEB_CLIENT, config.POSTMAN_CLIENT], // Allow requests only from this origin
+  origin: config.webClient, 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow cookies, if your application uses them
   optionsSuccessStatus: 204, // Some legacy browsers (IE11) choke on 204
@@ -35,5 +44,5 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`her-healing-initiative-api is running on port ${PORT}`);
+  //console.log(`her-healing-initiative-api is running on port ${PORT}`);
 });

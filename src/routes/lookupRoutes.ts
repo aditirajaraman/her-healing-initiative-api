@@ -12,7 +12,7 @@ let lookupEntities: lookupEntity[];
 const { writeFile, readFile } = require('fs');
 const getFolderPath = (dataType:string) => {
   let dataFolderPath = path.join(__dirname, '..', 'data', dataType + '.json');
-  console.log(dataFolderPath)
+  //console.log(dataFolderPath)
   return dataFolderPath;
 }
 
@@ -20,7 +20,7 @@ const getFolderPath = (dataType:string) => {
 lookupRoutes.get("/countries", (req: Request, res: Response) => {
   readFile(getFolderPath('countries'), (error:any, data:any) => {
     if (error) {
-      console.log(error);
+      //console.log(error);
       return;
     }
     lookupEntities = JSON.parse(data);
@@ -32,7 +32,7 @@ lookupRoutes.get("/countries", (req: Request, res: Response) => {
 lookupRoutes.get("/states", (req: Request, res: Response) => {
   readFile(getFolderPath('states'), (error:any, data:any) => {
     if (error) {
-      console.log(error);
+      //console.log(error);
       return;
     }
     lookupEntities = JSON.parse(data);
@@ -44,7 +44,7 @@ lookupRoutes.get("/states", (req: Request, res: Response) => {
 lookupRoutes.get("/cities", (req: Request, res: Response) => {
   readFile(getFolderPath('cities'), (error:any, data:any) => {
     if (error) {
-      console.log(error);
+      //console.log(error);
       return;
     }
     lookupEntities = JSON.parse(data);

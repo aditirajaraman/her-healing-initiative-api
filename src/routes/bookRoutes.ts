@@ -33,7 +33,7 @@ bookRoutes.get("/books", (req: Request, res: Response) => {
 bookRoutes.get("/books/:id", (req: Request, res: Response) => {
   readFile(dataFolderPath, (error:any, data:any) => {
     if (error) {
-      console.log(error);
+      //console.log(error);
       return;
     }
     books = JSON.parse(data);
@@ -52,7 +52,7 @@ bookRoutes.post("/books", (req: Request, res: Response) => {
   let newBook:Book;
   readFile(dataFolderPath, (error:any, data:any) => {
     if (error) {
-      console.log(error);
+      //console.log(error);
       return;
     }
     books = JSON.parse(data);
@@ -67,10 +67,10 @@ bookRoutes.post("/books", (req: Request, res: Response) => {
     //console.log(books);
     writeFile(dataFolderPath, JSON.stringify(books, null, 2), (err:any) => {
       if (err) {
-        console.log('Failed to write updated data to file');
+        //console.log('Failed to write updated data to file');
         return;
       }
-      console.log('Updated file successfully');
+      //console.log('Updated file successfully');
     });
     res.status(201).json(newBook);
   });
@@ -81,7 +81,7 @@ bookRoutes.put("/books/:id", (req: Request, res: Response) => {
   const bookId = parseInt(req.params.id);
   readFile(dataFolderPath, (error:any, data:any) => {
     if (error) {
-      console.log(error);
+      //console.log(error);
       return;
     }
     books = JSON.parse(data);
@@ -100,10 +100,10 @@ bookRoutes.put("/books/:id", (req: Request, res: Response) => {
       //Write jsonStream
       writeFile(dataFolderPath, JSON.stringify(books, null, 2), (err:any) => {
         if (err) {
-          console.log('Failed to write updated data to file');
+          //console.log('Failed to write updated data to file');
           return;
         }
-        console.log('Updated file successfully');
+        //console.log('Updated file successfully');
       }); 
       res.json(books[bookIndex]);
     } else {
@@ -117,7 +117,7 @@ bookRoutes.delete("/books/:id", (req: Request, res: Response) => {
   const bookId = parseInt(req.params.id);
   readFile(dataFolderPath, (error:any, data:any) => {
     if (error) {
-      console.log(error);
+      //console.log(error);
       return;
     }
     books = JSON.parse(data);
@@ -128,10 +128,10 @@ bookRoutes.delete("/books/:id", (req: Request, res: Response) => {
       //Write jsonStream
       writeFile(dataFolderPath, JSON.stringify(books, null, 2), (err:any) => {
         if (err) {
-          console.log('Failed to write updated data to file');
+          //console.log('Failed to write updated data to file');
           return;
         }
-        console.log('Updated file successfully');
+        //console.log('Updated file successfully');
       }); 
       res.json(books[bookIndex]);
     } else {

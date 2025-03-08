@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts",
-    "build": "tsc",
-    "serve": "node dist/index.js"
+    "local": "SET NODE_ENV=local & nodemon src/index.ts",
+    "dev": "SET NODE_ENV=development & nodemon src/index.ts",
+    "qa": "SET NODE_ENV=qa & nodemon src/index.ts",
+    "prod": "SET NODE_ENV=production & nodemon src/index.ts",
+    "build": "SET NODE_ENV=development & tsc",
+    "serve": "NODE_ENV=development node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +25,8 @@
   },
   "dependencies": {
     "@types/mongoose": "^5.11.97",
+    "config": "^3.3.12",
+    "config-file-ts": "^0.2.8-rc1",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "express": "^4.21.2",

@@ -94,7 +94,7 @@ userRoutes.post("/users", (req: Request, res: Response) => {
       else{
         try {
           const savedUser = user.save().then(function(result){
-              console.log('User saved....');
+              //console.log('User saved....');
               res.json({success: true, message: "Successful"});
           })
         } catch (error: any) {

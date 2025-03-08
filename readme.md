@@ -121,3 +121,16 @@ npm run dev
 2) Choose Method : GET, POST etc. 
 3) New HTTP Request on Postman 
 4) Run API : http://localhost:5500/api/events
+
+### Setting up Multiple Environments 
+https://thegeekplanets.medium.com/managing-environment-variables-in-node-js-using-the-dotenv-package-2a5c8eee61a8
+
+
+https://traveling-coderman.net/code/node-architecture/configuration-management/
+
+https://stackoverflow.com/questions/46266609/host-node-js-on-windows-server-iis
+
+
+### Setting up Environment Variables 
+https://medium.com/@zouyu1121/how-to-check-and-set-the-node-env-environment-variable-and-its-use-in-a-project-1fd70eb0b5a1
+
