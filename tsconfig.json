@@ -109,8 +109,9 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": [
-      "src"
-       //"src/**/*.json"
+      "src",
+      //"src/data"
+      "src/**/*.json"
   ],
   "exclude": ["node_modules"],
   "scripts": {

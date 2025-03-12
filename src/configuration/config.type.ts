@@ -8,7 +8,6 @@ export type Environment =
 
 export interface Config {
   environment: Environment;
-  apiEndpoint: string;
   apiPort: number;
   webClient: string;
   postManClient?: string; // Optional property

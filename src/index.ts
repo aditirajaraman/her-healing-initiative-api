@@ -12,7 +12,7 @@ import { getConfig} from "./configuration/configs/get-config";
 const config:Config = getConfig({ENV:"development"})
 
 const app = express();
-const PORT = config.apiPort || 3000;
+const PORT = process.env.PORT || 3000;
 
 //console.log(`environment : ${config.environment} `);
 //console.log(`apiEndpoint : ${config.apiEndpoint} `);
