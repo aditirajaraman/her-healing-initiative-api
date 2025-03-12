@@ -12,7 +12,7 @@ import { getConfig} from "./configuration/configs/get-config";
 const config:Config = getConfig({ENV:"development"})
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 //console.log(`environment : ${config.environment} `);
 //console.log(`apiEndpoint : ${config.apiEndpoint} `);
@@ -44,5 +44,5 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.listen(PORT, () => {
-  //console.log(`her-healing-initiative-api is running on port ${PORT}`);
+  console.log(`her-healing-initiative-api is running on port ${PORT}`);
 });
