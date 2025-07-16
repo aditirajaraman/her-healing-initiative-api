@@ -1,0 +1,47 @@
+web => 
+ns-1155.awsdns-16.org
+ns-1952.awsdns-52.co.uk
+ns-936.awsdns-53.net
+ns-414.awsdns-51.com
+
+Name Server: NS-1155.AWSDNS-16.ORG
+Name Server: NS-1952.AWSDNS-52.CO.UK
+Name Server: NS-936.AWSDNS-53.NET
+Name Server: NS-414.AWSDNS-51.COM
+
+Elastic IP : 3.88.74.43
+
+api => 
+ns-1143.awsdns-14.org
+ns-1826.awsdns-36.co.uk
+ns-955.awsdns-55.net
+ns-281.awsdns-35.com
+
+Elastic IP : 3.219.23.253
+
+Set Custom Domain Name for localhost Website in IIS
+https://www.tutorialsteacher.com/articles/set-custom-domain-name-for-localhost-website-iis
+
+
+
+her-healing-initiative.org
+http://api.her-healing-initiative.org:5000/api/events
+
+
+
+http://www.her-healing-initiative.org/
+
+http://www.her-healing-initiative-api.org:5000/api/events
+
+http://www.her-healing-initiative-api.org/api/events
+
+67.80.129.138/32
+
+vpc-06c5291eb91c1c8ae - Aditi Web Server
+vpc-06c5291eb91c1c8ae - Aditi App Server 
+
+whois -v her-healing-initiative.org
+whois -v her-healing-initiative-api.org
+
+
+https://repost.aws/knowledge-center/route-53-troubleshoot-nxdomain-responsesgrind 

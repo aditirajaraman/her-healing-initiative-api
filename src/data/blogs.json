@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Endometriosis",
+    "author": "Shruthi Srinivasan",
+    "authoricon": "ivanmagalhaes",
+    "url":"https://docs.google.com/document/d/19htXTqgkdlF-cpYOBvQfEi_EdYEFT6Kr5rH-ZfrtAH4/edit?usp=sharing",
+    "imglink":"hackathon",
+    "description":" is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    "tag" :"disease",
+    "likes" :12,
+    "comments" :42,
+    "createdAt": "2024-08-22T20:40:55.519Z",
+    "updatedAt": ""
+  },
+  {
+    "id": 2,
+    "title": "The Gender Health Bias in Research for Women's Health",
+    "author": "Snigdha Tadikamalla",
+    "authoricon": "asiyajavayant",
+    "url":"https://docs.google.com/document/d/1vfn9oEBp6HaOrLh_J80EsdTirW7UjgpDCAKuQA7RHYo/edit?tab=t.0",
+    "imglink":"hackathon",
+     "description":" is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    "tag" :"liberals",
+     "likes" :12,
+    "comments" :23,
+    "createdAt": "2024-08-22T20:40:55.519Z",
+    "updatedAt": ""
+  },
+  {
+    "id": 3,
+    "title": "PCOS",
+    "author": "Tejaswi Garlapati",
+    "authoricon": "elwinsharvill",
+    "url":"https://docs.google.com/document/d/1vfn9oEBp6HaOrLh_J80EsdTirW7UjgpDCAKuQA7RHYo/edit?tab=t.0",
+    "imglink":"hackathon",
+     "description":" is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    "tag" :"healthcare",
+     "likes" :11,
+    "comments" :22,
+    "createdAt": "2024-11-22T20:40:55.519Z",
+    "updatedAt": ""
+  }
+]

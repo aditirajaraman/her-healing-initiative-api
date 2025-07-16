@@ -5,6 +5,7 @@ import bookRoutes from "./routes/bookRoutes";
 import lookupRoutes from "./routes/lookupRoutes";
 import userRoutes from "./routes/userRoutes";
 import eventRoutes from "./routes/eventRoutes";
+import blogRoutes from "./routes/blogRoutes";
 
 import { Config, Environment  } from "./configuration/config.type";
 import { getConfig} from "./configuration/configs/get-config";
@@ -38,6 +39,7 @@ app.use("/api", bookRoutes);
 app.use("/api", lookupRoutes);
 app.use("/api", userRoutes);
 app.use("/api", eventRoutes);
+app.use("/api", blogRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to the her-healing-initiative API!");
