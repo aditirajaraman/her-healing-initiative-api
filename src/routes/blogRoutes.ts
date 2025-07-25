@@ -1,40 +1,48 @@
 import { Router, Request, Response } from "express";
 var path = require('path');
-
+import Blog from "../models/Blog";
 const blogRoutes = Router();
 
 interface Blog {
   id: number;
   title: string;
   author: string;
-  authoricon: string;
+  authorIcon: string;
   url: string;
-  imglink:string;
-  description:string;
+  blogImage:string;
+  content:string;
   tag:string;
   likes: number;
   comments: number;
-  createdAt:string;
-  updatedAt:string;
+  publicationDate:Date;
+  createdAt:Date;
+  updatedAt:Date;
 }
 
-let blogs: Blog[];
-
-const { writeFile, readFile } = require('fs');
-const dataFolderPath = path.join(__dirname, '..', 'data', 'blogs.json');
-
-// Get all books
+// Get all blogs
 blogRoutes.get("/blogs", (req: Request, res: Response) => {
-  readFile(dataFolderPath, (error:any, data:any) => {
-    if (error) {
-      console.log(error);
-      return;
-    }
-    blogs = JSON.parse(data);
-    //console.log(parsedData);
-    res.json(blogs);
-  });
+ try {
+    Blog.find().then(function(result){
+      //console.log('Found Events...');
+      res.send(result);
+    })
+  } catch (error: any) {
+    console.error('Error Finding Blogs:' + error.message);
+    res.send(error.message);
+  }
 });
 
+//get blog
+blogRoutes.get("/blogs/:id", (req: Request, res: Response) => {
+  try {
+    Blog.findById(req.params.id).then(function(result){
+      //console.log('Found Event...');
+      res.send(result);
+    })
+  } catch (error: any) {
+    console.error('Error Finding Blog:' + error.message);
+    res.send(error.message);
+  }
+});
 
 export default blogRoutes;

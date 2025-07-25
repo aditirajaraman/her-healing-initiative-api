@@ -133,3 +133,5 @@ https://stackoverflow.com/questions/46266609/host-node-js-on-windows-server-iis
 ### Setting up Environment Variables 
 https://medium.com/@zouyu1121/how-to-check-and-set-the-node-env-environment-variable-and-its-use-in-a-project-1fd70eb0b5a1
 
+# API End point : http://localhost:5000/api/blogs
+# API End point : http://localhost:5000/api/blogs/6884037963259be72a3fd42b
