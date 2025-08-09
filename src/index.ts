@@ -15,8 +15,9 @@ const config:Config = getConfig({ENV:"development"})
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-//console.log(`environment : ${config.environment} `);
+console.log(`environment : ${config.environment} `);
 //console.log(`apiEndpoint : ${config.apiEndpoint} `);
+console.log(`allowedOrigins : ${config.webClient} `);
 
 // Add a list of allowed origins.
 // If you have more origins you would like to add, you can add them to the array below.

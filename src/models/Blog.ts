@@ -16,7 +16,6 @@ export interface IBlog extends mongoose.Document {
   title: string;
   author: string;
   authorIcon: string;
-  url: string;
   blogImage:string;
   content:string;
   tag:string;
@@ -31,7 +30,6 @@ export const BlogSchema = new mongoose.Schema({
   title: { type: String, required: true },
   author: { type: String, required: true },
   authorIcon: { type: String, required: true },
-  url: { type: String, required: true },
   blogImage: { type: String, required: true },
   content: { type: String, required: true },
   tag: { type: String, required: true },
@@ -39,7 +37,7 @@ export const BlogSchema = new mongoose.Schema({
   comments: { type: Number, required: true },
   publicationDate: { type: Date, required: true },
   createdAt: { type: Date, required: true },
-  updatedAt: { type: Date, required: true }
+  updatedAt: { type: Date, required: false }
 });
 
 const Blog = mongoose.model<IBlog>("blog", BlogSchema);

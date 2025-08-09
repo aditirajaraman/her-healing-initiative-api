@@ -45,4 +45,40 @@ blogRoutes.get("/blogs/:id", (req: Request, res: Response) => {
   }
 });
 
+blogRoutes.post("/blogs", (req: Request, res: Response) => {
+    //var user = new User(req.body);
+    //const formattedDate: Date = format(req.body.birthdate, 'dd/MM/yyyy');
+    //console.log("Initiated Post Request...");
+    //console.log(req.body);
+    //const formattedDate = parse(format(req.body.birthdate, "yyyy-MM-dd"), 'yyyy-MM-dd', new Date());
+    //console.log(formattedDate);
+    let time: number = Date.parse(req.body.publicationDate);
+    let pubDate: Date = new Date(time);
+    let blog = new Blog({
+      title: req.body.title,
+      author:'blog',
+      authorIcon:'elwinsharvill',
+      blogImage:'arts',
+      publicationDate:pubDate,
+      tag: req.body.tag,
+      content:'test',
+      likes:0,
+      comments:0,
+      createdAt :Date.now()	
+    });
+
+    console.log(blog);
+
+    /*----------------------Save Events ----------------*/
+    try {
+      const savedEvent = blog.save().then(function(result){
+          //console.log('User saved....');
+          res.json({success: true, message: "Blog saved Successfully"});
+      })
+    } catch (error: any) {
+      console.error('Error saving Blog:' + error.message);
+      res.json({success: false, message: error.message});
+    }
+});
+
 export default blogRoutes;
