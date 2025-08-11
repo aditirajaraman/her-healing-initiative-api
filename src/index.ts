@@ -7,6 +7,7 @@ import userRoutes from "./routes/userRoutes";
 import eventRoutes from "./routes/eventRoutes";
 import blogRoutes from "./routes/blogRoutes";
 import fileUploadRoutes from "./routes/fileUploadRoutes";
+import utilityRoutes  from "./routes/utilityRoutes";
 
 import { Config, Environment  } from "./configuration/config.type";
 import { getConfig} from "./configuration/configs/get-config";
@@ -43,6 +44,7 @@ app.use("/api", userRoutes);
 app.use("/api", eventRoutes);
 app.use("/api", blogRoutes);
 app.use("/api", fileUploadRoutes);
+app.use("/api", utilityRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to the her-healing-initiative API!");
