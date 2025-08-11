@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express";
+import { useParams } from 'react-router-dom';
 var path = require('path');
 import { format, parse } from 'date-fns';
 
@@ -27,7 +28,10 @@ const storage = multer.diskStorage({
         // Customize filename (e.g., add timestamp to prevent collisions)
         //console.log('--------filename----------');
         //console.log(file.originalname);
-        cb(null, userName + '_' + file.originalname + '_' + Date.now() + path.extname(file.originalname));
+        //const { blogId } = useParams();
+        //console.log('--------blogId----------');
+        //console.log(req.body.blogId);
+        cb(null, req.body.blogId + '_' + file.originalname + '_' + Date.now() + path.extname(file.originalname));
     }
 });
 
