@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
         //const { blogId } = useParams();
         //console.log('--------blogId----------');
         //console.log(req.body.blogId);
-        cb(null, req.body.blogId + '_' + file.originalname + '_' + Date.now() + path.extname(file.originalname));
+        cb(null, req.body.blogId + '_' + req.body.uiAction + '_' + Date.now() + path.extname(file.originalname));
     }
 });
 
