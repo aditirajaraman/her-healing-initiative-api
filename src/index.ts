@@ -16,6 +16,7 @@ const config:Config = getConfig({ENV:"development"})
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const bodyParser = require('body-parser');
 
 console.log(`environment : ${config.environment} `);
 //console.log(`apiEndpoint : ${config.apiEndpoint} `);
@@ -37,6 +38,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.json());
+
+// This middleware parses application/json bodies
+app.use(bodyParser.json());
+
+// This middleware parses application/x-www-form-urlencoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api", bookRoutes);
 app.use("/api", lookupRoutes);

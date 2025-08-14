@@ -55,6 +55,10 @@ const upload = multer({
   }  
 })
 
+const uploadDelete = multer({ 
+  dest: 'uploads/imanges'  
+})
+
 // Ensure the temporary directory exists
 const tempDir = path.join(rootAppDir, '/uploads/temp');
 if (!fs.existsSync(tempDir)) {
@@ -159,22 +163,25 @@ fileUploadRoutes.post("/fileUpload/uploadBlogContentImage", upload.single('Uploa
 
 
 // File Delete Content Imange
-fileUploadRoutes.post("/fileUpload/deleteBlogContentImage", (req: Request, res: Response) => {
+fileUploadRoutes.post("/fileUpload/deleteBlogContentImage", uploadDelete.single('UploadFiles'), (req: Request, res: Response) => {
   console.log('----------------file Removing-----------------')
-  console.log(req.body);
-  const { filename } = req.body;
+  //console.log(req.body);
+  const filename = `blogContentImage_${req.body.blogId}_${req.body.targetFileName}`;
   console.log(filename);
 
+  console.log("---------rootAppDir-------");
+  console.log(rootAppDir);
   if (!filename) {
     res.status(400).json({ error: 'Filename is required.' });
   }
 
   // Construct the absolute path to the file
-  const filePath = path.join(appFolderName, filename);
+  var finalPath = `${rootAppDir}\\uploads\\images`;
+  const filePath = path.join(finalPath, filename);
 
   // ‼️ SECURITY CHECK ‼️
   // Ensure the resolved path is still within the uploads directory
-  if (!filePath.startsWith(appFolderName)) {
+  if (!filePath.startsWith(rootAppDir)) {
     res.status(403).json({ error: 'Forbidden: Invalid path.' });
   }
 
@@ -185,13 +192,18 @@ fileUploadRoutes.post("/fileUpload/deleteBlogContentImage", (req: Request, res: 
           if (err.code === 'ENOENT') {
               res.status(404).json({ error: 'File not found.' });
           }
-          // Other server errors
-          console.error('Error deleting file:', err);
-          res.status(500).json({ error: 'Error deleting the file.' });
+          else{
+            // Other server errors
+            console.error('Error deleting file:', err);
+            res.status(500).json({ error: 'Error deleting the file.' });
+          }
+      }
+      else{
+        console.log(`Successfully deleted: ${filename}`);
+        res.status(200).json({ message: 'File deleted successfully.' });
       }
 
-      console.log(`Successfully deleted: ${filename}`);
-      res.status(200).json({ message: 'File deleted successfully.' });
+      
   });
 });
 
