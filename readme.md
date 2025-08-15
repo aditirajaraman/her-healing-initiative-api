@@ -139,3 +139,13 @@ https://medium.com/@zouyu1121/how-to-check-and-set-the-node-env-environment-vari
 ## install unique id depednencies 
 npm install uuid
 npm install react-router-dom
+
+#### install mutler
+### npm install multer @types/multer
+### npm install multer-s3 @types/multer-s3
+
+#### install aws-sdk
+### npm install aws-sdk
+### npm install @aws-sdk/client-s3
+
+
