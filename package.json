@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "local": "SET NODE_ENV=local & nodemon src/index.ts",
-    "dev": "SET NODE_ENV=development & nodemon src/index.ts",
-    "qa": "SET NODE_ENV=qa & nodemon src/index.ts",
-    "prod": "SET NODE_ENV=production & nodemon src/index.ts",
-    "build": "SET NODE_ENV=development & tsc",
-    "serve": "NODE_ENV=development node dist/index.js"
+    "local": "cross-env NODE_ENV=local & nodemon src/index.ts",
+    "dev": "cross-env NODE_ENV=development & nodemon src/index.ts",
+    "qa": "cross-env NODE_ENV=qa & nodemon src/index.ts",
+    "prod": "cross-env NODE_ENV=production & nodemon src/index.ts",
+    "build": "cross-env NODE_ENV=development & tsc",
+    "serve": "cross-env NODE_ENV=development node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.4",
+    "cross-env": "^10.0.0",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"

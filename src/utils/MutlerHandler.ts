@@ -27,7 +27,7 @@ const documentTypes: string[] = [
 
 const s3Storage = multerS3({
   s3: AWSS3Client,
-  bucket: bucketName,
+  bucket: process.env.awsS3BucketName,
   //acl: 'public-read', // Or another ACL, like 'private'
   metadata: (req: Request, file: Express.Multer.File, cb) => {
     cb(null, { fieldName: file.fieldname });
@@ -42,7 +42,7 @@ const s3Storage = multerS3({
 export const ImageUploader = multer({
   storage: multerS3({
     s3: AWSS3Client,
-    bucket: bucketName,
+    bucket: process.env.awsS3BucketName,
     //acl: 'public-read', // Or other desired ACL
     key: function (req, file, cb) {
       cb(null, Date.now().toString() + '-' + file.originalname); // Unique filename
@@ -60,7 +60,7 @@ export const ImageUploader = multer({
 export const DocumentUploader = multer({
   storage: multerS3({
     s3: AWSS3Client,
-    bucket: bucketName,
+    bucket: process.env.awsS3BucketName,
     //acl: 'public-read', // Or other desired ACL
     key: function (req, file, cb) {
       cb(null, Date.now().toString() + '-' + file.originalname); // Unique filename

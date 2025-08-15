@@ -9,25 +9,24 @@ import blogRoutes from "./routes/blogRoutes";
 import fileUploadRoutes from "./routes/fileUploadRoutes";
 import utilityRoutes  from "./routes/utilityRoutes";
 
-import { Config, Environment  } from "./configuration/config.type";
-import { getConfig} from "./configuration/configs/get-config";
-
-const config:Config = getConfig({ENV:"development"})
+// include configs
+require("dotenv").config();
+require("./config/appConfig");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.port || 5000;
 const bodyParser = require('body-parser');
 
-console.log(`environment : ${config.environment} `);
+//console.log(`environment : ${config.environment} `);
 //console.log(`apiEndpoint : ${config.apiEndpoint} `);
-console.log(`allowedOrigins : ${config.webClient} `);
+//console.log(`allowedOrigins : ${config.webClient} `);
 
 // Add a list of allowed origins.
 // If you have more origins you would like to add, you can add them to the array below.
 //const allowedOrigins = ['http://localhost:6000'];
 const corsOptions = {
   //origin: [process.env.CLIENT_BASE_URL || config.WEB_CLIENT, config.POSTMAN_CLIENT], // Allow requests only from this origin
-  origin: config.webClient, 
+  origin: process.env.webClient, 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow cookies, if your application uses them
   optionsSuccessStatus: 204, // Some legacy browsers (IE11) choke on 204
@@ -52,6 +51,12 @@ app.use("/api", eventRoutes);
 app.use("/api", blogRoutes);
 app.use("/api", fileUploadRoutes);
 app.use("/api", utilityRoutes);
+
+//console.log("-------process.env / NODE_ENV--------------")
+//console.log(process.env.NODE_ENV);
+//console.log(process.env.PORT);
+//console.log(process.env.webClient); 
+//console.log(process.env.awsAccessKeyId); 
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to the her-healing-initiative API!");
