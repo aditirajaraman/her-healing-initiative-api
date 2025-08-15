@@ -4,12 +4,14 @@ import multer from 'multer';
 import multerS3 from 'multer-s3';
 import { AWSS3Client } from '../utils/AWSS3Client';
 
+// include configs
+require("dotenv").config();
+require("../config/appConfig");
+
 // Custom error interface to help with TypeScript typing
 interface MulterError extends Error {
     code: 'LIMIT_FILE_SIZE' | 'LIMIT_FILE_COUNT' | 'LIMIT_PART_COUNT' | 'LIMIT_UNEXPECTED_FILE' | 'LIMIT_FIELD_KEY' | 'LIMIT_FIELD_VALUE' | 'LIMIT_FIELD_COUNT';
 }
-
-const bucketName = process.env.S3_BUCKET_NAME;
 
 const imageTypes: string[] = [
   'image/jpeg', 

@@ -7,6 +7,7 @@ import userRoutes from "./routes/userRoutes";
 import eventRoutes from "./routes/eventRoutes";
 import blogRoutes from "./routes/blogRoutes";
 import fileUploadRoutes from "./routes/fileUploadRoutes";
+import s3Routes from "./routes/s3Routes";
 import utilityRoutes  from "./routes/utilityRoutes";
 
 // include configs
@@ -50,6 +51,7 @@ app.use("/api", userRoutes);
 app.use("/api", eventRoutes);
 app.use("/api", blogRoutes);
 app.use("/api", fileUploadRoutes);
+app.use("/api", s3Routes);
 app.use("/api", utilityRoutes);
 
 //console.log("-------process.env / NODE_ENV--------------")
