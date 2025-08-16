@@ -112,6 +112,58 @@ s3Routes.delete("/deleteBucket", (req: Request, res: Response, next: NextFunctio
   }
 });
 
+s3Routes.post("/uploadBlogImageToBucket", ImageUploader.single('blogImage'), (req: Request, res: Response, next: NextFunction) => {
+  const uploadedFile = req.file as MulterS3File;
+  if (!uploadedFile) {
+      console.error("No file was uploaded.");
+      // Correct: Add 'return' to exit the function after sending the response.
+      res.status(400).send('No file uploaded.');
+  }
+
+  // Now we know 'uploadedFile' is defined, so no need for the second 'if' check.
+  // The previous 'if' block acts as a guard clause.
+  console.log("--------UploadImageToBucket / uploadedFile here------");
+  console.log("Bucket:", uploadedFile.bucket);
+  console.log("Location:", uploadedFile.location);
+  console.log("Key:", uploadedFile.key);
+  console.log("Original Name:", uploadedFile.originalname);
+
+  // Send the success response.
+  res.status(200).json({
+      message: 'Image uploaded successfully!',
+      fileLocation: uploadedFile.location, // S3 URL
+      key: uploadedFile.key,
+      bucket: uploadedFile.bucket,
+      originalname: uploadedFile.originalname
+  });
+});
+
+s3Routes.post("/uploadBlogContentImage", ImageUploader.single('UploadFiles'), (req: Request, res: Response, next: NextFunction) => {
+  const uploadedFile = req.file as MulterS3File;
+  if (!uploadedFile) {
+      console.error("No file was uploaded.");
+      // Correct: Add 'return' to exit the function after sending the response.
+      res.status(400).send('No file uploaded.');
+  }
+
+  // Now we know 'uploadedFile' is defined, so no need for the second 'if' check.
+  // The previous 'if' block acts as a guard clause.
+  console.log("--------uploadBlogContentImage / uploadedFile here------");
+  console.log("Bucket:", uploadedFile.bucket);
+  console.log("Location:", uploadedFile.location);
+  console.log("Key:", uploadedFile.key);
+  console.log("Original Name:", uploadedFile.originalname);
+
+  // Send the success response.
+  res.status(200).json({
+      message: 'Image uploaded successfully!',
+      fileLocation: uploadedFile.location, // S3 URL
+      key: uploadedFile.key,
+      bucket: uploadedFile.bucket,
+      originalname: uploadedFile.originalname
+  });
+});
+
 s3Routes.post("/uploadImageToBucket", ImageUploader.single('image'), (req: Request, res: Response, next: NextFunction) => {
   const uploadedFile = req.file as MulterS3File;
   if (!uploadedFile) {

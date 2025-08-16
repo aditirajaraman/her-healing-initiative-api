@@ -46,6 +46,7 @@ export const ImageUploader = multer({
     s3: AWSS3Client,
     bucket: process.env.awsS3BucketName,
     //acl: 'public-read', // Or other desired ACL
+    contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
       cb(null, Date.now().toString() + '-' + file.originalname); // Unique filename
     },
@@ -64,6 +65,7 @@ export const DocumentUploader = multer({
     s3: AWSS3Client,
     bucket: process.env.awsS3BucketName,
     //acl: 'public-read', // Or other desired ACL
+    contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
       cb(null, Date.now().toString() + '-' + file.originalname); // Unique filename
     },
