@@ -9,6 +9,8 @@ import {
 } from "@aws-sdk/client-s3";
 import multer from 'multer';
 
+import { renameS3Object } from "../utils/AWSS3Utils";
+
 var path = require('path');
 
 // Use this interface to get the correct types for req.file
@@ -236,6 +238,21 @@ s3Routes.post("/uploadBlogContentImage", BlogContentImageUploader.single('Upload
   console.log("Key:", uploadedFile.key);
   console.log("Original Name:", uploadedFile.originalname);
   console.log("BlogId:", req.body.blogId);
+
+  let blogId = req.body.blogId;
+  let oldFileName = uploadedFile.key;
+  let newFileName = "BlogContentImage_" + blogId + '_' + uploadedFile.key;
+
+  console.log("oldFileName:", oldFileName);
+  console.log("newFileName:", newFileName);
+
+  renameS3Object(uploadedFile.bucket, oldFileName, newFileName)
+    .then(() => {
+      console.log("Rename process completed.");
+    })
+    .catch((e) => {
+      console.error("Failed to rename file:", e);
+  });
 
   // Send the success response.
   res.status(200).json({
