@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
-import { ImageUploader, DocumentUploader } from '../utils/MutlerHandler';
+import { ImageUploader, BlogHeaderImageUploader, BlogContentImageUploader, DocumentUploader } from '../utils/MutlerHandler';
 import { AWSS3Client } from '../utils/AWSS3Client';
 import { 
   DeleteObjectCommand, 
@@ -194,7 +194,7 @@ s3Routes.delete("/deleteMultipleS3Objects", (req: Request, res: Response, next: 
 });
 
 
-s3Routes.post("/uploadBlogImageToBucket", ImageUploader.single('blogImage'), (req: Request, res: Response, next: NextFunction) => {
+s3Routes.post("/uploadBlogImageToBucket", BlogHeaderImageUploader.single('blogImage'), (req: Request, res: Response, next: NextFunction) => {
   const uploadedFile = req.file as MulterS3File;
   if (!uploadedFile) {
       console.error("No file was uploaded.");
@@ -220,7 +220,7 @@ s3Routes.post("/uploadBlogImageToBucket", ImageUploader.single('blogImage'), (re
   });
 });
 
-s3Routes.post("/uploadBlogContentImage", ImageUploader.single('UploadFiles'), (req: Request, res: Response, next: NextFunction) => {
+s3Routes.post("/uploadBlogContentImage", BlogContentImageUploader.single('UploadFiles'), (req: Request, res: Response, next: NextFunction) => {
   const uploadedFile = req.file as MulterS3File;
   if (!uploadedFile) {
       console.error("No file was uploaded.");
@@ -235,6 +235,7 @@ s3Routes.post("/uploadBlogContentImage", ImageUploader.single('UploadFiles'), (r
   console.log("Location:", uploadedFile.location);
   console.log("Key:", uploadedFile.key);
   console.log("Original Name:", uploadedFile.originalname);
+  console.log("BlogId:", req.body.blogId);
 
   // Send the success response.
   res.status(200).json({
