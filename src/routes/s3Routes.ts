@@ -7,6 +7,7 @@ import {
   DeleteObjectsCommand,
   DeleteObjectsCommandOutput 
 } from "@aws-sdk/client-s3";
+import multer from 'multer';
 
 var path = require('path');
 
@@ -121,11 +122,13 @@ s3Routes.delete("/deleteBucket", (req: Request, res: Response, next: NextFunctio
 });
 
 //{"bucketName": "her-healing-initiative-blogcontents", "key":"pexels-lkloeppel-1307630.jpg"}
-s3Routes.post("/deleteS3Object", (req: Request, res: Response, next: NextFunction) => {
+// upload.single('UploadFiles') - Trick for req.body being empty
+const upload = multer();
+s3Routes.post("/deleteS3Object", upload.single('UploadFiles'), (req: Request, res: Response, next: NextFunction) => {
   try {
     //const { name } = req.body;
     console.log("--------deleteS3Object------");
-    //console.log(req.body.name);
+    console.log(req);
     const bucketName = req.body.bucketName;
     const s3ObjectKey = req.body.key;
     console.log(bucketName);
