@@ -1,6 +1,8 @@
 import { Router, Request, Response } from "express";
 var path = require('path');
 
+import Tag from "../models/Tag";
+
 const lookupRoutes = Router();
 
 interface lookupEntity {
@@ -50,6 +52,19 @@ lookupRoutes.get("/cities", (req: Request, res: Response) => {
     lookupEntities = JSON.parse(data);
     res.json(lookupEntities);
   });
+});
+
+// Get all Users
+lookupRoutes.get("/tags", (req: Request, res: Response) => {
+  try {
+    Tag.find().then(function(result){
+      //console.log('Found Users...');
+      res.send(result);
+    })
+  } catch (error: any) {
+    console.error('Error Finding Tags:' + error.message);
+    res.send(error.message);
+  }
 });
 
 export default lookupRoutes;
