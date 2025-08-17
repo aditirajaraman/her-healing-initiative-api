@@ -47,8 +47,53 @@ export const ImageUploader = multer({
     bucket: process.env.awsS3BucketName,
     //acl: 'public-read', // Or other desired ACL
     contentType: multerS3.AUTO_CONTENT_TYPE,
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString() + '-' + file.originalname); // Unique filename
+    key: function (req:Request, file, cb) {
+      console.log('--------------ImageUploader--------');
+      console.log();
+      cb(null, 'BlogHeaderImage_' + req.body.blogId + '-' + file.originalname); // Unique filename
+    },
+  }),
+  fileFilter: (req, file, cb) => {
+    if (imageTypes.some(mimetype => mimetype == file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  }
+});
+
+export const BlogHeaderImageUploader = multer({
+  storage: multerS3({
+    s3: AWSS3Client,
+    bucket: process.env.awsS3BucketName,
+    //acl: 'public-read', // Or other desired ACL
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function (req:Request, file, cb) {
+      console.log('--------------BlogHeaderImageUploader--------');
+      console.log();
+      cb(null, 'BlogHeaderImage_' + req.body.blogId + '_' + file.originalname); // Unique filename
+    },
+  }),
+  fileFilter: (req, file, cb) => {
+    if (imageTypes.some(mimetype => mimetype == file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  }
+});
+
+export const BlogContentImageUploader = multer({
+  storage: multerS3({
+    s3: AWSS3Client,
+    bucket: process.env.awsS3BucketName,
+    //acl: 'public-read', // Or other desired ACL
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function (req:Request, file, cb) {
+      console.log('--------------BlogContentImageUploader--------');
+      console.log(file.filename);
+      console.log(file.originalname);
+      cb(null, file.originalname); // Unique filename
     },
   }),
   fileFilter: (req, file, cb) => {
@@ -66,8 +111,8 @@ export const DocumentUploader = multer({
     bucket: process.env.awsS3BucketName,
     //acl: 'public-read', // Or other desired ACL
     contentType: multerS3.AUTO_CONTENT_TYPE,
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString() + '-' + file.originalname); // Unique filename
+    key: function (req:Request, file, cb) {
+      cb(null, 'blogDocument_' + req.body.blogId + '-' + file.originalname); // Unique filename
     },
   }),
   fileFilter: (req, file, cb) => {
