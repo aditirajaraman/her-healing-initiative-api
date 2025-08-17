@@ -232,19 +232,19 @@ s3Routes.post("/uploadBlogContentImage", BlogContentImageUploader.single('Upload
 
   // Now we know 'uploadedFile' is defined, so no need for the second 'if' check.
   // The previous 'if' block acts as a guard clause.
-  console.log("--------uploadBlogContentImage / uploadedFile here------");
+  /*console.log("--------uploadBlogContentImage / uploadedFile here------");
   console.log("Bucket:", uploadedFile.bucket);
   console.log("Location:", uploadedFile.location);
   console.log("Key:", uploadedFile.key);
   console.log("Original Name:", uploadedFile.originalname);
-  console.log("BlogId:", req.body.blogId);
+  console.log("BlogId:", req.body.blogId);*/
 
   let blogId = req.body.blogId;
   let oldFileName = uploadedFile.key;
   let newFileName = "BlogContentImage_" + blogId + '_' + uploadedFile.key;
 
-  console.log("oldFileName:", oldFileName);
-  console.log("newFileName:", newFileName);
+  /*console.log("oldFileName:", oldFileName);
+  console.log("newFileName:", newFileName);*/
 
   renameS3Object(uploadedFile.bucket, oldFileName, newFileName)
     .then(() => {
@@ -258,7 +258,7 @@ s3Routes.post("/uploadBlogContentImage", BlogContentImageUploader.single('Upload
   res.status(200).json({
       message: 'Image uploaded successfully!',
       fileLocation: uploadedFile.location, // S3 URL
-      key: uploadedFile.key,
+      key: newFileName,
       bucket: uploadedFile.bucket,
       originalname: uploadedFile.originalname
   });
