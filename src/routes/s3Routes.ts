@@ -5,7 +5,9 @@ import {
   DeleteObjectCommand, 
   DeleteObjectCommandOutput,
   DeleteObjectsCommand,
-  DeleteObjectsCommandOutput 
+  DeleteObjectsCommandOutput,
+  PutObjectCommand,
+  PutObjectCommandInput 
 } from "@aws-sdk/client-s3";
 import multer from 'multer';
 
@@ -201,7 +203,10 @@ s3Routes.post("/uploadBlogImageToBucket", BlogHeaderImageUploader.single('blogIm
   if (!uploadedFile) {
       console.error("No file was uploaded.");
       // Correct: Add 'return' to exit the function after sending the response.
-      res.status(400).send('No file uploaded.');
+       res.status(400).json({
+        status:false,
+        message: 'Blog Image Upload Failed!',
+      });
   }
 
   // Now we know 'uploadedFile' is defined, so no need for the second 'if' check.
@@ -214,6 +219,7 @@ s3Routes.post("/uploadBlogImageToBucket", BlogHeaderImageUploader.single('blogIm
 
   // Send the success response.
   res.status(200).json({
+      status:true,
       message: 'Image uploaded successfully!',
       fileLocation: uploadedFile.location, // S3 URL
       key: uploadedFile.key,
@@ -227,7 +233,10 @@ s3Routes.post("/uploadBlogContentImage", BlogContentImageUploader.single('Upload
   if (!uploadedFile) {
       console.error("No file was uploaded.");
       // Correct: Add 'return' to exit the function after sending the response.
-      res.status(400).send('No file uploaded.');
+      res.status(200).json({
+        status:false,
+        message: 'Blog Content Upload Failed!',
+      });
   }
 
   // Now we know 'uploadedFile' is defined, so no need for the second 'if' check.
@@ -256,6 +265,7 @@ s3Routes.post("/uploadBlogContentImage", BlogContentImageUploader.single('Upload
 
   // Send the success response.
   res.status(200).json({
+      status:true,
       message: 'Image uploaded successfully!',
       fileLocation: uploadedFile.location, // S3 URL
       key: newFileName,
@@ -269,7 +279,7 @@ s3Routes.post("/uploadImageToBucket", ImageUploader.single('image'), (req: Reque
   if (!uploadedFile) {
       console.error("No file was uploaded.");
       // Correct: Add 'return' to exit the function after sending the response.
-      res.status(400).send('No file uploaded.');
+      res.status(400).json({status:false, message: 'Image uploaded successfully!'});
   }
 
   // Now we know 'uploadedFile' is defined, so no need for the second 'if' check.
@@ -282,6 +292,7 @@ s3Routes.post("/uploadImageToBucket", ImageUploader.single('image'), (req: Reque
 
   // Send the success response.
   res.status(200).json({
+      status:true,
       message: 'Image uploaded successfully!',
       fileLocation: uploadedFile.location, // S3 URL
       key: uploadedFile.key,
@@ -314,6 +325,52 @@ s3Routes.post("/uploadDocumentToBucket", DocumentUploader.single('document'), (r
       bucket: uploadedFile.bucket,
       originalname: uploadedFile.originalname
   });
+});
+
+// A route to upload rich text content
+s3Routes.post("/uploadRichText", (req: Request, res: Response, next: NextFunction)  => {
+  console.log("--------uploadRichText here------");
+  let content = req.body.content;
+  let blogId = req.body.blogId;
+  console.log(blogId);
+  console.log(content);
+
+  if (!content) {
+    res.status(400).send({ status:false, message: 'Content is required.' });
+  }
+  else
+  {
+    // Create a unique filename for the S3 object
+    const filename = `BlogContent_${blogId}.html`;
+
+    const params:PutObjectCommandInput  = {
+      Bucket: process.env.awsS3BucketName,
+      Key: `${filename}`, // Stores the files in a 'posts' folder
+      Body: content,
+      ContentType: 'text/html; charset=utf-8' // Important for a browser to render the content correctly
+      //ACL: 'public-read', // Makes the file publicly accessible
+    };
+
+    try {
+      const command = new PutObjectCommand(params);
+      AWSS3Client.send(command);
+
+      const fileUrl = `https://${params.Bucket}.s3.${process.env.awsS3BucketRegion}.amazonaws.com/${params.Key}`;
+
+      res.status(200).json({
+        status:true,
+        message: 'Content uploaded successfully!',
+        url: fileUrl,
+      });
+    } catch (error) {
+      console.error('Error uploading to S3:', error);
+      res.status(500).json(
+        { 
+          status:false,
+          message: 'Error uploading content to S3.', error 
+        });
+    }
+  }
 });
 
 

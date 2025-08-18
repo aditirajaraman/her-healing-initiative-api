@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 var path = require('path');
 import Blog from "../models/Blog";
 const blogRoutes = Router();
+const { URLSearchParams } = require('url');
 
 interface Blog {
   id: number;
@@ -9,7 +10,6 @@ interface Blog {
   author: string;
   authorIcon: string;
   url: string;
-  blogImage:string;
   content:string;
   tag:string;
   likes: number;
@@ -52,16 +52,25 @@ blogRoutes.post("/blogs", (req: Request, res: Response) => {
     //console.log(req.body);
     //const formattedDate = parse(format(req.body.birthdate, "yyyy-MM-dd"), 'yyyy-MM-dd', new Date());
     //console.log(formattedDate);
+    const queryString = req.url.split('?')[1];
+    
+    console.log("----------queryString------------")
+    //console.log(queryString);
+    // Create a URLSearchParams object from the querystring
+    const params = new URLSearchParams(queryString);
+    // Use the .get() method to access a single value
+    const blogId = params.get('blogId');
+    
+    //const blogId = "e4ac845b-101a-4808-8d4e-20c2718d4daf";
     let time: number = Date.parse(req.body.publicationDate);
     let pubDate: Date = new Date(time);
     let blog = new Blog({
+      blogId: blogId,
       title: req.body.title,
-      author:'blog',
-      authorIcon:'elwinsharvill',
-      blogImage:'arts',
+      author:req.body.author,
+      authorIcon:req.body.authorIcon,
       publicationDate:pubDate,
       tag: req.body.tag,
-      content:'test',
       likes:0,
       comments:0,
       createdAt :Date.now()	
@@ -73,11 +82,11 @@ blogRoutes.post("/blogs", (req: Request, res: Response) => {
     try {
       const savedEvent = blog.save().then(function(result){
           //console.log('User saved....');
-          res.json({success: true, message: "Blog saved Successfully"});
+          res.json({status:true, message: "Blog saved Successfully"});
       })
     } catch (error: any) {
       console.error('Error saving Blog:' + error.message);
-      res.json({success: false, message: error.message});
+      res.json({status:false, message: error.message});
     }
 });
 
