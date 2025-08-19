@@ -15,10 +15,10 @@ export interface IBlog extends mongoose.Document {
   id: number;
   blogId: string;
   title: string;
+  shortDescription:string;
   author: string;
   authorIcon: string;
   blogImage:string;
- // content:string;
   tag:string;
   likes: number;
   comments: number;
@@ -30,10 +30,10 @@ export interface IBlog extends mongoose.Document {
 export const BlogSchema = new mongoose.Schema({
   blogId: { type: String, required: true },
   title: { type: String, required: true },
+  shortDescription: { type: String, required: true },
   author: { type: String, required: true },
   authorIcon: { type: String, required: true },
-  //blogImage: { type: String, required: true },
-  //content: { type: String, required: true },
+  blogImage: { type: String, required: true },
   tag: { type: String, required: true },
   likes: { type: Number, required: true },
   comments: { type: Number, required: true },

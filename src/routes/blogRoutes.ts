@@ -66,6 +66,7 @@ blogRoutes.post("/blogs", (req: Request, res: Response) => {
     let pubDate: Date = new Date(time);
     let blog = new Blog({
       blogId: blogId,
+      blogImage:req.body.blogImage,
       title: req.body.title,
       author:req.body.author,
       authorIcon:req.body.authorIcon,
