@@ -68,6 +68,7 @@ blogRoutes.post("/blogs", (req: Request, res: Response) => {
       blogId: blogId,
       blogImage:req.body.blogImage,
       title: req.body.title,
+      shortDescription: req.body.shortDescription,
       author:req.body.author,
       authorIcon:req.body.authorIcon,
       publicationDate:pubDate,
