@@ -1,5 +1,7 @@
 
-import { AWSS3Client } from './AWSS3Client';
+import { AWSS3Client} from './AWSS3Client';
+import { GetObjectCommand } from '@aws-sdk/client-s3';
+
 import {
   CopyObjectCommand,
   DeleteObjectCommand,
@@ -57,9 +59,36 @@ export async function renameS3Object(
   }
 }
 
+export async function getS3FileContentAsString (
+  bucketName: string,
+  fileKey: string
+): Promise<string> {
+  const params = {
+    Bucket: bucketName,
+    Key: fileKey,
+  };
+
+  try {
+    const command = new GetObjectCommand(params);
+    const response = await AWSS3Client.send(command);
+
+    if (!response.Body) {
+      throw new Error('No body found in S3 response');
+    }
+
+    // The transformToString() method is a convenient way to read the stream and get a string.
+    const fileContent = await response.Body.transformToString();
+    return fileContent;
+  } catch (error) {
+    console.error('Error getting file from S3:', error);
+    throw error;
+  }
+};
+
 // Export it using CommonJS syntax
 module.exports = {
-  renameS3Object
+  renameS3Object,
+  getS3FileContentAsString
 };
 
 /*

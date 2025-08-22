@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { ImageUploader, BlogHeaderImageUploader, BlogContentImageUploader, DocumentUploader } from '../utils/MutlerHandler';
 import { AWSS3Client } from '../utils/AWSS3Client';
+import { getS3FileContentAsString, renameS3Object } from '../utils/AWSS3Utils';
 import { 
   DeleteObjectCommand, 
   DeleteObjectCommandOutput,
@@ -10,8 +11,6 @@ import {
   PutObjectCommandInput 
 } from "@aws-sdk/client-s3";
 import multer from 'multer';
-
-import { renameS3Object } from "../utils/AWSS3Utils";
 
 var path = require('path');
 
@@ -43,6 +42,22 @@ s3Routes.get("/listBuckets", (req: Request, res: Response, next: NextFunction) =
         res.json(data.Buckets);
       }
     });
+  } catch (error: any) {
+    next(error);
+  }
+});
+
+// Get all blogs
+s3Routes.get("/fileContent", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const fileKey = req.query.key as string;
+    console.log("---------------fileContent-------------");
+    console.log(process.env.awsS3BucketName);
+    console.log(fileKey);
+    //const fileKey = "BlogContent_e482eccf-066f-4c5c-9e6d-1628900c5988.html";
+    const fileContent = await getS3FileContentAsString(process.env.awsS3BucketName , fileKey);
+    //const fileContent = "";
+    res.status(200).send(fileContent);
   } catch (error: any) {
     next(error);
   }
@@ -372,6 +387,8 @@ s3Routes.post("/uploadRichText", (req: Request, res: Response, next: NextFunctio
     }
   }
 });
+
+
 
 
 /**
