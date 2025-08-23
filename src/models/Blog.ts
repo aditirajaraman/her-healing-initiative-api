@@ -38,7 +38,7 @@ export const BlogSchema = new mongoose.Schema({
   likes: { type: Number, required: true },
   comments: { type: Number, required: true },
   publicationDate: { type: Date, required: true },
-  createdAt: { type: Date, required: true },
+  createdAt: { type: Date, required: false },
   updatedAt: { type: Date, required: false }
 });
 

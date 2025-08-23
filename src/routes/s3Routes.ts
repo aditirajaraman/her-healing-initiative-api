@@ -48,7 +48,7 @@ s3Routes.get("/listBuckets", (req: Request, res: Response, next: NextFunction) =
 });
 
 // Get all blogs
-s3Routes.get("/fileContent", async (req: Request, res: Response, next: NextFunction) => {
+s3Routes.get("/getContent", async (req: Request, res: Response, next: NextFunction) => {
   try {
     const fileKey = req.query.key as string;
     console.log("---------------fileContent-------------");
