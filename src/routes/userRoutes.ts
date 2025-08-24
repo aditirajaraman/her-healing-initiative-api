@@ -151,7 +151,7 @@ userRoutes.post("/users/validateUser", async (req: Request, res: Response) => {
         return;
       }
       else{
-        res.json({success: true, message: "Found User"});
+        res.json({success: true, message: "Authenticated User"});
       }
 
    } catch (error: any) {
