@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+import { Types } from 'mongoose';
 
 const connectDB = async () => {
     try {
@@ -12,7 +13,7 @@ const connectDB = async () => {
 connectDB();
 
 export interface IBlog extends mongoose.Document {
-  id: number;
+  id: Types.ObjectId;
   blogId: string;
   title: string;
   shortDescription:string;
