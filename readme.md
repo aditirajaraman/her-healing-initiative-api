@@ -148,4 +148,7 @@ npm install react-router-dom
 ### npm install aws-sdk
 ### npm install @aws-sdk/client-s3
 
-
+#### Integrate Sesssionless cookies 
+### npm install express express-session  --force
+### npm install --save-dev @types/express @types/express-session --force
+### npm install connect-mongo

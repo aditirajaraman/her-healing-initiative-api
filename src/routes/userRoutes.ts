@@ -140,7 +140,7 @@ userRoutes.delete("/users/:id", (req: Request, res: Response) => {
 });
 
 // Get all Users
-userRoutes.post("/users/validateUser", async (req: Request, res: Response) => {
+userRoutes.post("/users/login", async (req: Request, res: Response) => {
    try {
       const user = await User.findOne({
         username: req.body.username,
@@ -151,12 +151,38 @@ userRoutes.post("/users/validateUser", async (req: Request, res: Response) => {
         return;
       }
       else{
+        //req.session.userId = user.id.toHexString();
+        req.session.username = req.body.username;
         res.json({success: true, message: "Authenticated User"});
       }
 
    } catch (error: any) {
      res.send("InValid");
    }
+});
+
+// A logout route to destroy the session
+userRoutes.get('/logout', (req: Request, res: Response) => {
+  req.session.destroy((err) => {
+    if (err) {
+      res.status(500).json({ message: 'Could not log out.' });
+    }
+    res.status(200).json({ message: 'Logged out successfully.' });
+  });
+});
+
+// A protected route that requires a session
+userRoutes.get('/profile', (req: Request, res: Response) => {
+  const session = req.session as unknown as { username: string };
+  // TypeScript checks if req.session.username exists
+  if (session.username) {
+    res.status(200).json({
+      message: `Welcome, ${req.session.username}!`
+      //userId: req.session.userId,
+    });
+  } else {
+    res.status(401).json({ message: 'Unauthorized. Please log in.' });
+  }
 });
 
 export default userRoutes;
