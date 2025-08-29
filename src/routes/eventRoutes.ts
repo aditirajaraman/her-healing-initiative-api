@@ -32,8 +32,8 @@ eventRoutes.get("/events/:id", (req: Request, res: Response) => {
 });
 
 
-// Create a new User
-eventRoutes.post("/events", (req: Request, res: Response) => {
+// Create a new Event
+eventRoutes.post("/events/createEvent", (req: Request, res: Response) => {
     //var user = new User(req.body);
     //const formattedDate: Date = format(req.body.birthdate, 'dd/MM/yyyy');
     //console.log("Initiated Post Request...");

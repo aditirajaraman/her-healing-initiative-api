@@ -26,7 +26,7 @@ const awsSDK = require("aws-sdk");
 
 
 // Get all blogs
-s3Routes.get("/listBuckets", (req: Request, res: Response, next: NextFunction) => {
+s3Routes.get("/s3/listBuckets", (req: Request, res: Response, next: NextFunction) => {
   try {
     // Set the region
     awsSDK.config.update({ region: process.env.awsS3BucketRegion });
@@ -48,7 +48,7 @@ s3Routes.get("/listBuckets", (req: Request, res: Response, next: NextFunction) =
 });
 
 // Get all blogs
-s3Routes.get("/getContent", async (req: Request, res: Response, next: NextFunction) => {
+s3Routes.get("/s3/getContent", async (req: Request, res: Response, next: NextFunction) => {
   try {
     const fileKey = req.query.key as string;
     console.log("---------------fileContent-------------");
@@ -63,7 +63,7 @@ s3Routes.get("/getContent", async (req: Request, res: Response, next: NextFuncti
   }
 });
 
-s3Routes.post("/createBucket", (req: Request, res: Response, next: NextFunction) => {
+s3Routes.post("/s3/createBucket", (req: Request, res: Response, next: NextFunction) => {
   try {
       //const { name } = req.body;
       console.log("----------bucketName------");
@@ -103,7 +103,7 @@ s3Routes.post("/createBucket", (req: Request, res: Response, next: NextFunction)
     }  
 });
 
-s3Routes.delete("/deleteBucket", (req: Request, res: Response, next: NextFunction) => {
+s3Routes.delete("/s3/deleteBucket", (req: Request, res: Response, next: NextFunction) => {
   try {
     //const { name } = req.body;
     console.log("--------bucketName------");
@@ -143,7 +143,7 @@ s3Routes.delete("/deleteBucket", (req: Request, res: Response, next: NextFunctio
 //{"bucketName": "her-healing-initiative-blogcontents", "key":"pexels-lkloeppel-1307630.jpg"}
 // upload.single('UploadFiles') - Trick for req.body being empty
 const upload = multer();
-s3Routes.post("/deleteS3Object", upload.single('UploadFiles'), (req: Request, res: Response, next: NextFunction) => {
+s3Routes.post("/s3/deleteS3Object", upload.single('UploadFiles'), (req: Request, res: Response, next: NextFunction) => {
   try {
     //const { name } = req.body;
     console.log("--------deleteS3Object------");
@@ -182,7 +182,7 @@ s3Routes.post("/deleteS3Object", upload.single('UploadFiles'), (req: Request, re
 });
 
 //{"bucketName": "her-healing-initiative-blogcontents", "key":"pexels-lkloeppel-1307630.jpg"}
-s3Routes.delete("/deleteMultipleS3Objects", (req: Request, res: Response, next: NextFunction) => {
+s3Routes.delete("/s3/deleteMultipleS3Objects", (req: Request, res: Response, next: NextFunction) => {
   try {
     /*const KEYS_TO_DELETE = [
       "images/old-profile.jpg",
@@ -213,7 +213,7 @@ s3Routes.delete("/deleteMultipleS3Objects", (req: Request, res: Response, next: 
 });
 
 
-s3Routes.post("/uploadBlogImageToBucket", BlogHeaderImageUploader.single('blogImage'), (req: Request, res: Response, next: NextFunction) => {
+s3Routes.post("/s3/uploadBlogImageToBucket", BlogHeaderImageUploader.single('blogImage'), (req: Request, res: Response, next: NextFunction) => {
   const uploadedFile = req.file as MulterS3File;
   if (!uploadedFile) {
       console.error("No file was uploaded.");
@@ -243,7 +243,7 @@ s3Routes.post("/uploadBlogImageToBucket", BlogHeaderImageUploader.single('blogIm
   });
 });
 
-s3Routes.post("/uploadBlogContentImage", BlogContentImageUploader.single('UploadFiles'), (req: Request, res: Response, next: NextFunction) => {
+s3Routes.post("/s3/uploadBlogContentImage", BlogContentImageUploader.single('UploadFiles'), (req: Request, res: Response, next: NextFunction) => {
   const uploadedFile = req.file as MulterS3File;
   if (!uploadedFile) {
       console.error("No file was uploaded.");
@@ -289,7 +289,7 @@ s3Routes.post("/uploadBlogContentImage", BlogContentImageUploader.single('Upload
   });
 });
 
-s3Routes.post("/uploadImageToBucket", ImageUploader.single('image'), (req: Request, res: Response, next: NextFunction) => {
+s3Routes.post("/s3/uploadImageToBucket", ImageUploader.single('image'), (req: Request, res: Response, next: NextFunction) => {
   const uploadedFile = req.file as MulterS3File;
   if (!uploadedFile) {
       console.error("No file was uploaded.");
@@ -316,7 +316,7 @@ s3Routes.post("/uploadImageToBucket", ImageUploader.single('image'), (req: Reque
   });
 });
 
-s3Routes.post("/uploadDocumentToBucket", DocumentUploader.single('document'), (req: Request, res: Response, next: NextFunction) => {
+s3Routes.post("/s3/uploadDocumentToBucket", DocumentUploader.single('document'), (req: Request, res: Response, next: NextFunction) => {
   const uploadedFile = req.file as MulterS3File;
   if (!uploadedFile) {
       console.error("No file was uploaded.");
@@ -343,7 +343,7 @@ s3Routes.post("/uploadDocumentToBucket", DocumentUploader.single('document'), (r
 });
 
 // A route to upload rich text content
-s3Routes.post("/uploadRichText", (req: Request, res: Response, next: NextFunction)  => {
+s3Routes.post("/s3/uploadRichText", (req: Request, res: Response, next: NextFunction)  => {
   console.log("--------uploadRichText here------");
   let content = req.body.content;
   let blogId = req.body.blogId;

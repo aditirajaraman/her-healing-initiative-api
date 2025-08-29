@@ -152,3 +152,12 @@ npm install react-router-dom
 ### npm install express express-session  --force
 ### npm install --save-dev @types/express @types/express-session --force
 ### npm install connect-mongo
+
+#### JWT Integratiob
+### Generate JWT Secrets 
+
+https://jwtsecretkeygenerator.com/
+https://bcrypt-generator.com/
+
+### npm install bcryptjs @types/bcryptjs
+### npm install jsonwebtoken  @types/jsonwebtoken

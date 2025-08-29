@@ -11,8 +11,6 @@ import fileUploadRoutes from "./routes/fileUploadRoutes";
 import s3Routes from "./routes/s3Routes";
 import utilityRoutes  from "./routes/utilityRoutes";
 
-import {SessionStore}  from "./utils/SessionStore";
-
 // include configs
 require("dotenv").config();
 require("./config/appConfig");
@@ -56,7 +54,7 @@ if (!SESSION_SECRET) {
 }
 
 // Configure the express-session middleware
-app.use(session({
+/*app.use(session({
   secret: SESSION_SECRET, // A key used to sign the session cookie.
   resave: false, // Prevents session from being re-saved on every request
   saveUninitialized: false, // Prevents creating a session for unauthenticated users
@@ -67,9 +65,9 @@ app.use(session({
     httpOnly: true, // Recommended: prevents client-side JS from accessing the cookie
     secure: false, // Use 'secure' in production for HTTPS
     sameSite: 'lax', // Recommended: protects against CSRF attacks
-    maxAge: 60 * 5// Session will expire in 5 mins 
+    maxAge: 60 * 1// Session will expire in 5 mins 
   }
-}));
+}));*/
 
 // This middleware parses application/x-www-form-urlencoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -61,7 +61,7 @@ blogRoutes.get("/blogs/getBlogByBlogId/:blogId", (req: Request, res: Response) =
   }
 });
 
-blogRoutes.post("/createBlog", (req: Request, res: Response) => {
+blogRoutes.post("/blogs/createBlog", (req: Request, res: Response) => {
     //var user = new User(req.body);
     //const formattedDate: Date = format(req.body.birthdate, 'dd/MM/yyyy');
     //console.log("Initiated Post Request...");
@@ -100,7 +100,7 @@ blogRoutes.post("/createBlog", (req: Request, res: Response) => {
     }
 });
 
-blogRoutes.post("/saveBlog", async (req: Request, res: Response) => {
+blogRoutes.post("/blogs/saveBlog", async (req: Request, res: Response) => {
     //var user = new User(req.body);
     //const formattedDate: Date = format(req.body.birthdate, 'dd/MM/yyyy');
     console.log("SaveBlog() Post Requested...");
