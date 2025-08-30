@@ -3,10 +3,17 @@ var path = require('path');
 import { format, parse } from 'date-fns';
 import bcrypt from 'bcryptjs';
 import jwt, { SignOptions } from 'jsonwebtoken';
-
+import { ObjectId } from 'mongodb';
 
 import User from "../models/User";
 import { protect } from '../middleware/auth';
+
+interface CurrentUser {
+  id: string;
+  email: string;
+  name: string;
+  avatar:string;
+}
 
 const userRoutes = Router();
 
@@ -89,6 +96,7 @@ userRoutes.post("/users/register", async (req: Request, res: Response) => {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
+    avatar:'dummyavatar.png',
     username: req.body.username,
     password: req.body.password,
     country: req.body.country.code,
@@ -170,6 +178,14 @@ userRoutes.post("/users/login", async (req: Request, res: Response) => {
         console.log("---------Found user---------");
         if (dbUser && (await bcrypt.compare(password, dbUser.password))) {
           console.log("---------Found user : path 1 ---------");
+          console.log(dbUser._id);
+          let data = dbUser._id as ObjectId;
+          const currentUser: CurrentUser = {
+            id : data.toHexString(),
+            name: dbUser.firstname + ' ' + dbUser.lastname,
+            email: dbUser.email,
+            avatar: dbUser.avatar
+          };
           const token = jwt.sign(
           { 
             id: dbUser._id },
@@ -178,7 +194,7 @@ userRoutes.post("/users/login", async (req: Request, res: Response) => {
                 expiresIn: process.env.JWT_EXPIRES_IN as SignOptions['expiresIn']
             }
           );
-          res.json({success: true, token: token });
+          res.json({success: true, token: token, user:currentUser });
         } 
         else{
            res.json({success: false, message: "Password Comparison failed !"});
