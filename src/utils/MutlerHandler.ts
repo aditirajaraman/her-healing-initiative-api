@@ -1,12 +1,12 @@
-// src/middleware/mutlerHandler.ts
+/*-----------------------------------imports----------------------------------------*/
 import { Request } from 'express';
 import multer from 'multer';
 import multerS3 from 'multer-s3';
 import { AWSS3Client } from '../utils/AWSS3Client';
 
+/*----------------------------------Custom-imports / Interfaces / Functions----------------------------------*/
 // include configs
-require("dotenv").config();
-require("../config/appConfig");
+import config  from '../config/config';
 
 // Custom error interface to help with TypeScript typing
 interface MulterError extends Error {
@@ -29,7 +29,7 @@ const documentTypes: string[] = [
 
 const s3Storage = multerS3({
   s3: AWSS3Client,
-  bucket: process.env.awsS3BucketName,
+  bucket: config.AWS_S3_BUCKET_NAME,
   //acl: 'public-read', // Or another ACL, like 'private'
   metadata: (req: Request, file: Express.Multer.File, cb) => {
     cb(null, { fieldName: file.fieldname });
@@ -44,7 +44,7 @@ const s3Storage = multerS3({
 export const ImageUploader = multer({
   storage: multerS3({
     s3: AWSS3Client,
-    bucket: process.env.awsS3BucketName,
+    bucket: config.AWS_S3_BUCKET_NAME,
     //acl: 'public-read', // Or other desired ACL
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req:Request, file, cb) {
@@ -65,7 +65,7 @@ export const ImageUploader = multer({
 export const BlogHeaderImageUploader = multer({
   storage: multerS3({
     s3: AWSS3Client,
-    bucket: process.env.awsS3BucketName,
+    bucket: config.AWS_S3_BUCKET_NAME,
     //acl: 'public-read', // Or other desired ACL
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req:Request, file, cb) {
@@ -86,7 +86,7 @@ export const BlogHeaderImageUploader = multer({
 export const BlogContentImageUploader = multer({
   storage: multerS3({
     s3: AWSS3Client,
-    bucket: process.env.awsS3BucketName,
+    bucket: config.AWS_S3_BUCKET_NAME,
     //acl: 'public-read', // Or other desired ACL
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req:Request, file, cb) {
@@ -108,7 +108,7 @@ export const BlogContentImageUploader = multer({
 export const DocumentUploader = multer({
   storage: multerS3({
     s3: AWSS3Client,
-    bucket: process.env.awsS3BucketName,
+    bucket: config.AWS_S3_BUCKET_NAME,
     //acl: 'public-read', // Or other desired ACL
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req:Request, file, cb) {

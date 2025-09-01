@@ -1,4 +1,4 @@
-
+/*-----------------------------------imports----------------------------------------*/
 import { AWSS3Client} from './AWSS3Client';
 import { GetObjectCommand } from '@aws-sdk/client-s3';
 
@@ -7,6 +7,7 @@ import {
   DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 
+/*----------------------------------Utility Functionality---------------------------*/
 /**
  * Renames an object in an S3 bucket.
  * This is done by copying the object to a new key and then deleting the old one.

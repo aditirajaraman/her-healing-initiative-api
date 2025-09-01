@@ -1,7 +1,11 @@
-// Protect routes by verifying the incoming JWT
+/*-----------------------------------imports----------------------------------------*/
 import { Request, Response, NextFunction } from 'express';
 import jwt, { TokenExpiredError } from 'jsonwebtoken';
 
+/*-----------------------------------imports / Custom -------------------------------*/
+import config from '../config/config';
+
+/*-------------------------Custom Interfaces/Properties/ Functions ------------------*/
 interface JwtPayload {
     id: string;
 }
@@ -12,10 +16,10 @@ export const protect = (req: Request, res: Response, next: NextFunction) => {
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try {
             token = req.headers.authorization.split(' ')[1];
-            //const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
+            //const decoded = jwt.verify(token, config.JWT_SECRET as string) as JwtPayload;
             // You can attach user info to the request object here if needed
             // req.user = await User.findById(decoded.id).select('-password');
-            jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+            jwt.verify(token, config.JWT_SECRET, (err, user) => {
                 // If the token is invalid or expired, the `err` object will be populated.
                 if (err) {
                     if (err instanceof TokenExpiredError) {

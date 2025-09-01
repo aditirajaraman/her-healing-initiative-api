@@ -1,12 +1,14 @@
 /*
     Use RangeHandler Design Pattern Later
 */
-const uuid = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
+const uuid = uuidv4();
+
 export class UniqueIdGenerator {
     constructor() {
     }
 
     public getUniqueId(): string {
-        return uuid.v4();
+        return uuid;
     }
 }

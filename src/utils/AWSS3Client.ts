@@ -1,25 +1,25 @@
-// src/s3.ts
+/*-----------------------------------imports----------------------------------------*/
 import { S3Client } from '@aws-sdk/client-s3';
 
+/*-----------------------------Custom Interfaces/Properties/ Functions--------------*/
 // include configs
-require("dotenv").config();
-require("../config/appConfig");
+import config  from '../config/config';
 
+/*----------------------------------Utility Functionality---------------------------*/
 console.log('---------------AWS Secrets-------');
-//console.log(process.env.awsAccessKeyId);
-//console.log(process.env.awsSecretAccessKey);
-//console.log(`apiEndpoint : ${config.apiEndpoint} `);
-//console.log(`allowedOrigins : ${config.webClient} `);
+//console.log(config.AWS_ACCESS_KEY_ID);
+//console.log(config.AWS_SECRET_ACCESS_KEY);
+//console.log(`allowedOrigins : ${config.WEB_CLIENT} `);
 
 // Set up your S3 client using environment variables
 // It's recommended to configure credentials and region this way
 // for production applications.
 // Create S3 service object
 const AWSS3Client = new S3Client({
-  region: process.env.awsS3BucketRegion,
+  region: config.AWS_S3_BUCKET_REGION,
   credentials: {
-    accessKeyId:process.env.awsAccessKeyId,
-    secretAccessKey:process.env.awsSecretAccessKey
+    accessKeyId:config.AWS_ACCESS_KEY_ID,
+    secretAccessKey:config.AWS_SECRET_ACCESS_KEY
   },
 });
 

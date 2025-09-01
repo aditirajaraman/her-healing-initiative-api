@@ -1,9 +1,10 @@
+/*-----------------------------------imports----------------------------------------*/
 import { Router, Request, Response } from "express";
-var path = require('path');
-import { format, parse } from 'date-fns';
 
+/*-----------------------------------imports / Custom -------------------------------*/
 import Event from "../models/Event";
 
+/*-----------------------------------------routes------------------------------------*/
 const eventRoutes = Router();
 
 // Get all Users

@@ -1,10 +1,12 @@
+/*-----------------------------------imports----------------------------------------*/
+
 import { Router, Request, Response } from "express";
 import { Types } from 'mongoose';
-var path = require('path');
 import Blog from "../models/Blog";
-const blogRoutes = Router();
-const { URLSearchParams } = require('url');
+import { URLSearchParams } from 'url';
 
+/*-----------------------------Custom Interfaces/Properties/ Functions--------------*/
+// interfaces - blog model - Refactor tpto use Mongo Object Model
 interface Blog {
   id: Types.ObjectId
   blogId: string;
@@ -20,6 +22,9 @@ interface Blog {
   createdAt:Date;
   updatedAt:Date;
 }
+
+/*-----------------------------------------routes------------------------------------*/
+const blogRoutes = Router();
 
 // Get all blogs
 blogRoutes.get("/blogs", (req: Request, res: Response) => {

@@ -1,13 +1,15 @@
+/*-----------------------------------imports----------------------------------------*/
 import { Router, Request, Response } from "express";
-var path = require('path');
 import { format, parse } from 'date-fns';
 import bcrypt from 'bcryptjs';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { ObjectId } from 'mongodb';
 
+/*-----------------------------------imports / Custom -------------------------------*/
 import User from "../models/User";
 import { protect } from '../middleware/auth';
 
+/*---------------------------Custom Interfaces/Properties/ Functions -----------------*/
 interface CurrentUser {
   id: string;
   email: string;
@@ -15,6 +17,7 @@ interface CurrentUser {
   avatar:string;
 }
 
+/*------------------------------------------routes------------------------------------*/
 const userRoutes = Router();
 
 // Get all Users

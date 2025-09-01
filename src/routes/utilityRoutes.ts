@@ -1,7 +1,10 @@
+/*-----------------------------------imports----------------------------------------*/
 import { Router, Request, Response } from "express";
 
+/*-----------------------------------imports / Custom -------------------------------*/
 import { UniqueIdGenerator } from '../utils/UniqueIDGenerator';
 
+/*----------------------------------------routes--------------------------------------*/
 const utilityRoutes = Router();
 
 // Get all countries

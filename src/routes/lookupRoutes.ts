@@ -1,57 +1,62 @@
+/*-----------------------------------imports----------------------------------------*/
 import { Router, Request, Response } from "express";
-var path = require('path');
+import path from 'path';
+import { writeFile, readFile } from 'fs/promises';
 
+/*-----------------------------------imports / Custom -------------------------------*/
 import Tag from "../models/Tag";
 
-const lookupRoutes = Router();
-
+/*------------------------Custom Interfaces/Properties/ Functions --------------------*/
 interface lookupEntity {
   name: string;
   code: string;
 }
 let lookupEntities: lookupEntity[];
 
-const { writeFile, readFile } = require('fs');
 const getFolderPath = (dataType:string) => {
   let dataFolderPath = path.join(__dirname, '..', 'data', dataType + '.json');
   //console.log(dataFolderPath)
   return dataFolderPath;
 }
 
+/*----------------------------------------routes--------------------------------------*/
+
+const lookupRoutes = Router();
+
 // Get all countries
-lookupRoutes.get("/countries", (req: Request, res: Response) => {
-  readFile(getFolderPath('countries'), (error:any, data:any) => {
-    if (error) {
-      //console.log(error);
-      return;
-    }
-    lookupEntities = JSON.parse(data);
+lookupRoutes.get("/countries", async (req: Request, res: Response) => {
+  try {
+    const data = await readFile(getFolderPath('countries'), 'utf8');
+    const lookupEntities = JSON.parse(data);
     res.json(lookupEntities);
-  });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An internal server error occurred" });
+  }
 });
 
 // Get all states
-lookupRoutes.get("/states", (req: Request, res: Response) => {
-  readFile(getFolderPath('states'), (error:any, data:any) => {
-    if (error) {
-      //console.log(error);
-      return;
-    }
-    lookupEntities = JSON.parse(data);
+lookupRoutes.get("/states", async (req: Request, res: Response) => {
+  try {
+    const data = await readFile(getFolderPath('states'), 'utf8');
+    const lookupEntities = JSON.parse(data);
     res.json(lookupEntities);
-  });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An internal server error occurred" });
+  }
 });
 
 // Get all cities
-lookupRoutes.get("/cities", (req: Request, res: Response) => {
-  readFile(getFolderPath('cities'), (error:any, data:any) => {
-    if (error) {
-      //console.log(error);
-      return;
-    }
-    lookupEntities = JSON.parse(data);
+lookupRoutes.get("/cities", async (req: Request, res: Response) => {
+  try {
+    const data = await readFile(getFolderPath('cities'), 'utf8');
+    const lookupEntities = JSON.parse(data);
     res.json(lookupEntities);
-  });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An internal server error occurred" });
+  }
 });
 
 // Get all Users
