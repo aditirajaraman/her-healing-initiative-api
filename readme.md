@@ -167,11 +167,14 @@ https://bcrypt-generator.com/
 
 ### npm install zod
 
-#### Pre-Requisites 
-### Follow https://docs.google.com/document/d/1NquQ1lL93cbc53aHCgU_nm5oXDDGJnyzL2h7Xvy-p90/edit?usp=drive_link  
+
 
 
 #### -----------------------DEPLOYMENT------------------------------###
+
+#### Pre-Requisites 
+### Follow https://docs.google.com/document/d/1NquQ1lL93cbc53aHCgU_nm5oXDDGJnyzL2h7Xvy-p90/edit?usp=drive_link  
+
 ### 1) Take backup of D:\Data\Apps\her-healing-initiative-api
 ### 2) npm run build on local machine of her-healing-initiative-api
 ### 3) copy <local folder>\her-healing-initiative-api\dist folder and overwrite 
@@ -179,8 +182,7 @@ https://bcrypt-generator.com/
 ### 4) include <local folder>\her-healing-initiative-api\src\data folder to destination
 ### 5) delete existing node_modules, package-lock.json and run npm install -force
 ### 6) setup web.config
-https://her-healing-initiative.org
-https://her-healing-initiative=api.org
+### 7) Test API http://her-healing-initiative-api.org/api/blogs
 
 
 
