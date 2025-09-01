@@ -1,15 +1,19 @@
 {
   "name": "her-healing-initiative-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "her-healing-initiative-api",
   "main": "index.js",
+  "type:": "module",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "local": "cross-env NODE_ENV=local & nodemon src/index.ts",
-    "dev": "cross-env NODE_ENV=development & nodemon src/index.ts",
+    "start": "cross-env NODE_ENV=development & ts-node src/index.ts",
+    "local": "cross-env NODE_ENV=development & nodemon src/index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon src/index.ts node --trace-warnings",
     "qa": "cross-env NODE_ENV=qa & nodemon src/index.ts",
     "prod": "cross-env NODE_ENV=production & nodemon src/index.ts",
-    "build": "cross-env NODE_ENV=development & tsc",
+    "build:ts": "tsc",
+    "build:copy": "copyfiles -u 1 'src/data/*' dist",
+    "build": "cross-env NODE_ENV=development && npm run build:clean && npm run build:ts && npm run build:copy",
+    "build:clean": "rimraf dist/",
     "serve": "cross-env NODE_ENV=development node dist/index.js"
   },
   "keywords": [],
@@ -24,6 +28,7 @@
     "@types/multer": "^2.0.0",
     "@types/multer-s3": "^3.0.3",
     "@types/node": "^22.13.4",
+    "copyfiles": "^2.4.1",
     "cross-env": "^10.0.0",
     "eslint": "^9.33.0",
     "nodemon": "^3.1.9",
@@ -33,7 +38,6 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.864.0",
-    "aws-sdk": "^2.1692.0",
     "bcryptjs": "^3.0.2",
     "config": "^3.3.12",
     "config-file-ts": "^0.2.8-rc1",
@@ -48,6 +52,7 @@
     "mongoose": "^8.10.0",
     "multer": "^2.0.2",
     "multer-s3": "^3.0.1",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "zod": "^4.1.5"
   }
 }
