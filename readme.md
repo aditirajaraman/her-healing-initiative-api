@@ -167,9 +167,6 @@ https://bcrypt-generator.com/
 
 ### npm install zod
 
-
-
-
 #### -----------------------DEPLOYMENT------------------------------###
 
 #### Pre-Requisites 
@@ -184,7 +181,3 @@ https://bcrypt-generator.com/
 ### 5) delete existing node_modules, package-lock.json and run npm install -force
 ### 6) setup web.config
 ### 7) Test API http://her-healing-initiative-api.org/api/blogs
-
-
-
-
