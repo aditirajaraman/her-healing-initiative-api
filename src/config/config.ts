@@ -17,6 +17,7 @@ switch (env) {
         break;
     case 'production':
         dotenv.config({ path: '.env.production' });
+        break;
     default:
         throw new Error(`Unknown environment: ${env}`);
 }

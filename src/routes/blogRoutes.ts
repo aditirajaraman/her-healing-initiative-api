@@ -88,6 +88,8 @@ blogRoutes.post("/blogs/createBlog", (req: Request, res: Response) => {
       authorIcon:req.body.authorIcon,
       publicationDate:pubDate,
       tag: req.body.tag,
+      likes:0,
+      comments:0,
       createdAt:new Date()
     });
 

@@ -13,6 +13,7 @@
     "build:ts": "tsc",
     "build:copy": "copyfiles -u 1 'src/data/*' dist",
     "build": "cross-env NODE_ENV=development && npm run build:clean && npm run build:ts && npm run build:copy",
+    "build_prod": "cross-env NODE_ENV=production && npm run build:clean && npm run build:ts && npm run build:copy",
     "build:clean": "rimraf dist/",
     "serve": "cross-env NODE_ENV=development node dist/index.js"
   },
