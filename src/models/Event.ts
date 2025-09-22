@@ -27,7 +27,7 @@ export const EventSchema = new mongoose.Schema({
   eventImage: { type: String, required: true },
   eventTag: { type: String, required: true },
   eventOrganizer: { type: String, required: true }
-});
+}, { collection: 'events' }); // <-- Explicit collection name
 
 const Event = mongoose.model<IEvent>("event", EventSchema);
 export default Event;

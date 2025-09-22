@@ -41,7 +41,7 @@ export const BlogSchema = new mongoose.Schema({
   publicationDate: { type: Date, required: true },
   createdAt: { type: Date, required: false },
   updatedAt: { type: Date, required: false }
-});
+}, { collection: 'blogs' }); // <-- Explicit collection name
 
 const Blog = mongoose.model<IBlog>("blog", BlogSchema);
 export default Blog;

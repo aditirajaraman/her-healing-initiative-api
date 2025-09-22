@@ -31,7 +31,7 @@ export const UserSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
   birthdate: { type: Date, required: false }
-});
+}, { collection: 'users' }); // <-- Explicit collection name
 
 const User = mongoose.model<IUser>("user", UserSchema);
 export default User;

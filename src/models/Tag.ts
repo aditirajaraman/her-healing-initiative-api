@@ -19,7 +19,7 @@ export interface ITag extends mongoose.Document {
 export const TagSchema = new mongoose.Schema({
   name: { type: String, required: true },
   value: { type: String, required: true }
-});
+}, { collection: 'tags' }); // <-- Explicit collection name
 
 const Tag = mongoose.model<ITag>("tag", TagSchema);
 export default Tag;
