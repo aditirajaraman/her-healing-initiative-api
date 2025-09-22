@@ -5,6 +5,7 @@ import { writeFile, readFile } from 'fs/promises';
 
 /*-----------------------------------imports / Custom -------------------------------*/
 import Tag from "../models/Tag";
+import EventTag from "../models/EventTag";
 
 /*------------------------Custom Interfaces/Properties/ Functions --------------------*/
 interface lookupEntity {
@@ -60,7 +61,7 @@ lookupRoutes.get("/cities", async (req: Request, res: Response) => {
 });
 
 // Get all Users
-lookupRoutes.get("/tags", (req: Request, res: Response) => {
+lookupRoutes.get("/tags", async (req: Request, res: Response) => {
   try {
     Tag.find().then(function(result){
       //console.log('Found Users...');
@@ -68,6 +69,18 @@ lookupRoutes.get("/tags", (req: Request, res: Response) => {
     })
   } catch (error: any) {
     console.error('Error Finding Tags:' + error.message);
+    res.send(error.message);
+  }
+});
+
+// Get all Users
+lookupRoutes.get("/eventTags", async (req: Request, res: Response) => {
+   try {
+    const result = await EventTag.find();
+    console.log('Found EventTags:', result);
+    res.send(result);
+  } catch (error: any) {
+    console.error('Error Finding EventTags:' + error.message);
     res.send(error.message);
   }
 });
