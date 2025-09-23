@@ -1,6 +1,6 @@
 /*-----------------------------------imports----------------------------------------*/
 import { Router, Request, Response, NextFunction } from "express";
-import { ImageUploader, BlogHeaderImageUploader, BlogContentImageUploader, DocumentUploader } from '../utils/MutlerHandler';
+import { ImageUploader, BlogHeaderImageUploader, BlogContentImageUploader,EventHeaderImageUploader, DocumentUploader } from '../utils/MutlerHandler';
 import { 
   ListBucketsCommand, 
   CreateBucketCommand,
@@ -306,6 +306,37 @@ s3Routes.post("/s3/uploadBlogImageToBucket", BlogHeaderImageUploader.single('blo
   });
 });
 
+s3Routes.post("/s3/uploadEventImageToBucket", EventHeaderImageUploader.single('eventImage'), (req: Request, res: Response, next: NextFunction) => {
+  const uploadedFile = req.file as MulterS3File;
+  if (!uploadedFile) {
+      console.error("No file was uploaded.");
+      // Correct: Add 'return' to exit the function after sending the response.
+       res.status(400).json({
+        status:false,
+        message: 'Event Image Upload Failed!',
+      });
+  }
+
+  // Now we know 'uploadedFile' is defined, so no need for the second 'if' check.
+  // The previous 'if' block acts as a guard clause.
+  console.log("--------UploadImageToBucket / uploadedFile here------");
+  console.log("Bucket:", uploadedFile.bucket);
+  console.log("Location:", uploadedFile.location);
+  console.log("Key:", uploadedFile.key);
+  console.log("Original Name:", uploadedFile.originalname);
+
+  // Send the success response.
+  res.status(200).json({
+      status:true,
+      message: 'Image uploaded successfully!',
+      fileLocation: uploadedFile.location, // S3 URL
+      key: uploadedFile.key,
+      bucket: uploadedFile.bucket,
+      originalname: uploadedFile.originalname
+  });
+});
+
+
 s3Routes.post("/s3/uploadBlogContentImage", BlogContentImageUploader.single('UploadFiles'), (req: Request, res: Response, next: NextFunction) => {
   const uploadedFile = req.file as MulterS3File;
   if (!uploadedFile) {
@@ -316,6 +347,7 @@ s3Routes.post("/s3/uploadBlogContentImage", BlogContentImageUploader.single('Upl
         message: 'Blog Content Upload Failed!',
       });
   }
+  
 
   // Now we know 'uploadedFile' is defined, so no need for the second 'if' check.
   // The previous 'if' block acts as a guard clause.

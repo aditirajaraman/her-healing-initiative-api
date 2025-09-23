@@ -77,8 +77,27 @@ lookupRoutes.get("/tags", async (req: Request, res: Response) => {
 lookupRoutes.get("/eventTags", async (req: Request, res: Response) => {
    try {
     const result = await EventTag.find();
-    console.log('Found EventTags:', result);
-    res.send(result);
+    // Group by groupName
+    // Group tags by groupName and groupCode
+    const groupMap: Record<string, { label: string, code: string, items: any[] }> = {};
+    result.forEach(tag => {
+      const key = `${tag.groupName}|${tag.groupCode}`;
+      if (!groupMap[key]) {
+        groupMap[key] = {
+          label: tag.groupName,
+          code: tag.groupCode,
+          items: []
+        };
+      }
+      groupMap[key].items.push({
+        label: tag.name,
+        value: tag.value
+      });
+    });
+
+    const grouped = Object.values(groupMap);
+    res.json(grouped);
+    //res.send(result);
   } catch (error: any) {
     console.error('Error Finding EventTags:' + error.message);
     res.send(error.message);

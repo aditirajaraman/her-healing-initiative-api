@@ -83,6 +83,27 @@ export const BlogHeaderImageUploader = multer({
   }
 });
 
+export const EventHeaderImageUploader = multer({
+  storage: multerS3({
+    s3: AWSS3Client,
+    bucket: config.AWS_S3_BUCKET_NAME,
+    //acl: 'public-read', // Or other desired ACL
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function (req:Request, file, cb) {
+      console.log('--------------EventHeaderImageUploader--------');
+      console.log();
+      cb(null, 'EventHeaderImage_' + req.body.eventId + '_' + file.originalname); // Unique filename
+    },
+  }),
+  fileFilter: (req, file, cb) => {
+    if (imageTypes.some(mimetype => mimetype == file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  }
+});
+
 export const BlogContentImageUploader = multer({
   storage: multerS3({
     s3: AWSS3Client,
