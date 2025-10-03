@@ -3,6 +3,7 @@ import { Router, Request, Response } from "express";
 
 /*-----------------------------------imports / Custom -------------------------------*/
 import Event from "../models/Event";
+import User from "../models/User";
 
 /*-----------------------------------------routes------------------------------------*/
 const eventRoutes = Router();
@@ -20,11 +21,44 @@ eventRoutes.get("/events", (req: Request, res: Response) => {
   }
 });
 
-eventRoutes.get("/events/:id", (req: Request, res: Response) => {
+eventRoutes.get("/events/:id", async (req: Request, res: Response) => {
   try {
-    Event.findById(req.params.id).then(function(result){
+    Event.findById(req.params.id).then(async function(result){
       //console.log('Found Event...');
-      res.send(result);
+      //res.send(result);
+      if (!result) {
+        res.status(404).json({ success: false, message: "Event not found" });
+      }
+      else{
+        const organizers = result.eventOrganizers;
+        
+        // Find all users and collect their firstnames
+        const users = await Promise.all(
+          organizers.map(org => User.findOne({ username: org }))
+        );
+        const fullnames = users
+          .filter(user => user) // filter out nulls if any user is not found
+          .map(user => user.firstname + ' ' + user.lastname); // use username if firstname is empty
+        res.json({
+          eventTitle: result.eventTitle,
+          eventSubTitle: result.eventSubTitle,
+          eventSummary: result.eventSummary,
+          eventImage: result.eventImage,
+          eventTags: result.eventTags,
+          eventOrganizerType: result.eventOrganizerType,
+          eventOrganizers: result.eventOrganizers,
+          eventOrganizersFullNames: fullnames,
+          eventLocationType: result.eventLocationType,
+          eventLocation: result.eventLocation,
+          eventDate: result.eventDate,
+          eventStartTime: result.eventStartTime,
+          eventEndTime: result.eventEndTime,
+          faqs: result.faqs,
+          itenaries: result.itenaries,
+          createdAt: result.createdAt,
+          updatedAt: result.updatedAt
+        });
+      }
     })
   } catch (error: any) {
     console.error('Error Finding Event:' + error.message);
