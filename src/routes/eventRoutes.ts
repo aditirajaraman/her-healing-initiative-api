@@ -23,8 +23,9 @@ eventRoutes.get("/events", (req: Request, res: Response) => {
 
 eventRoutes.get("/events/:id", async (req: Request, res: Response) => {
   try {
-    Event.findById(req.params.id).then(async function(result){
-      //console.log('Found Event...');
+    //console.log('Finding Event...' + req.params.id);
+    Event.findOne({ eventId: req.params.id }).then(async function(result){
+      console.log('Found Event...');
       //res.send(result);
       if (!result) {
         res.status(404).json({ success: false, message: "Event not found" });
@@ -40,6 +41,7 @@ eventRoutes.get("/events/:id", async (req: Request, res: Response) => {
           .filter(user => user) // filter out nulls if any user is not found
           .map(user => user.firstname + ' ' + user.lastname); // use username if firstname is empty
         res.json({
+          eventId: result.eventId,
           eventTitle: result.eventTitle,
           eventSubTitle: result.eventSubTitle,
           eventSummary: result.eventSummary,

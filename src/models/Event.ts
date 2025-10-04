@@ -30,6 +30,7 @@ export interface itenary {
 }
 
 export interface IEvent extends mongoose.Document {
+  eventId: string;
   eventTitle: string;
   eventSubTitle: string;
   eventSummary: string;
@@ -49,6 +50,7 @@ export interface IEvent extends mongoose.Document {
 }
 
 export const EventSchema = new mongoose.Schema({
+  eventId: { type: String, required: true },
   eventTitle: { type: String, required: true },
   eventSubTitle: { type: String, required: true },
   eventSummary: { type: String, required: true },
