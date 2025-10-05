@@ -197,9 +197,9 @@ eventRoutes.post("/blogs/saveEvent", async (req: Request, res: Response) => {
       // 4. Handle the result
       // The type of `updatedUser` is correctly inferred as `IUser | null`.
       if (updatedUser) {
-        res.json({status:true, message: `Event with ObjectId:${req.body._id} updated!`});
+        res.json({status:true, message: `Event with ObjectId:${req.body.id} updated!`});
       } else {
-        res.json({status:false, message: `Event with ObjectId:${req.body._id} not found !`});
+        res.json({status:false, message: `Event with ObjectId:${req.body.id} not found !`});
       }
       
     } catch (error: any) {
