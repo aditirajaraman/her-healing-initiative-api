@@ -1,5 +1,6 @@
 /*-----------------------------------imports----------------------------------------*/
 import { Router, Request, Response } from "express";
+import { Types } from 'mongoose';
 
 /*-----------------------------------imports / Custom -------------------------------*/
 import Event from "../models/Event";
@@ -41,6 +42,7 @@ eventRoutes.get("/events/:id", async (req: Request, res: Response) => {
           .filter(user => user) // filter out nulls if any user is not found
           .map(user => user.firstname + ' ' + user.lastname); // use username if firstname is empty
         res.json({
+          id: result._id,
           eventId: result.eventId,
           eventTitle: result.eventTitle,
           eventSubTitle: result.eventSubTitle,
@@ -155,5 +157,54 @@ eventRoutes.post("/events/createEvent", async (req: Request, res: Response) => {
       res.json({success: false, message: error.message});
     }
 });
+
+eventRoutes.post("/blogs/saveEvent", async (req: Request, res: Response) => {
+    //var user = new User(req.body);
+    //const formattedDate: Date = format(req.body.birthdate, 'dd/MM/yyyy');
+    console.log("saveEvent() Post Requested...");
+    /*----------------------Save Blog ----------------*/
+    const queryString = req.url.split('?')[1];
+    const params = new URLSearchParams(queryString);
+    const id = params.get('id');
+    const eventId = params.get('eventId');
+    console.log("-----parameters------");
+    console.log(id);
+    console.log(eventId);
+    try {
+      //1, This provides a layer of type-safety and ensures the ID format is correct.
+      const objectId = Types.ObjectId.createFromHexString(id);
+
+      // 2. Define the update object
+      const update = { 
+        eventTitle: req.body.eventTitle, 
+        eventSubTitle: req.body.eventSubTitle,
+        eventSummary: req.body.eventSummary,
+        eventImage: req.body.eventImage,
+        eventTags: req.body.eventTags,
+        updatedAt: new Date()
+      };
+
+      // 3. Call findByIdAndUpdate with correct generics and options
+      const updatedUser = await Event.findByIdAndUpdate(
+        objectId,
+        update,
+        {
+          new: true, // Returns the updated document. Crucial for getting the modified data.
+          runValidators: true // Runs schema validators on the update operation.
+        }
+      );
+
+      // 4. Handle the result
+      // The type of `updatedUser` is correctly inferred as `IUser | null`.
+      if (updatedUser) {
+        res.json({status:true, message: `Event with ObjectId:${req.body._id} updated!`});
+      } else {
+        res.json({status:false, message: `Event with ObjectId:${req.body._id} not found !`});
+      }
+      
+    } catch (error: any) {
+      res.json({status:false, message: error.message});
+    }
+})
 
 export default eventRoutes;
